@@ -21,9 +21,37 @@
   <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
   <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.min.css' %}">
 <style>
+/* On screens that are 767px wide or less, the background color is olive */
+@media screen and (max-width: 767px) {
+  .hiddenmobile {
+    display: none;
+  }
+  .moveup{
+    margin-top: -4em;
+  }
+}
+
+/* On screens that are 767px wide or less, the background color is olive */
+@media screen and (max-width: 470px) {
+  
+  .moveup{
+    margin-top: -18em;
+  }
+}
+@media screen and (max-width: 500px) {
+  
+  .moveup{
+    margin-top: -18em;
+  }
+}
+
+
 .slidecontainer {
   width: 100%;
 }
+
+
+
 
 .slider {
   -webkit-appearance: none;
@@ -253,23 +281,25 @@
     <li data-target="#demo" data-slide-to="2"></li>
   </ul>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="{% static 'img/1.JPG' %}" alt="Los Angeles" width="1100" height="500">
+<!--     <div class="carousel-item active">
+      <img src="{% static 'img/1.JPG' %}" class="img-fluid" alt="Los Angeles">
       <div class="carousel-caption">
-  <!--       <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p> -->
+
       </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="{% static 'img/2.JPG' %}" alt="Chicago" width="1100" height="500">
+    </div> -->
+    <div class="carousel-item active">
+      <img src="{% static 'img/2.jpg' %}" alt="Chicago" class="img-fluid">
       <div class="carousel-caption">
 <!--         <h3>Chicago</h3>
         <p>Thank you, Chicago!</p> -->
       </div>   
     </div>
- 
-    <div class="carousel-item">
-      <img src="{% static 'img/3.JPG' %}" alt="New York" width="1100" height="500">
+
+
+
+
+   <div class="carousel-item">
+      <img src="{% static 'img/5.jpg' %}" alt="New York" class="img-fluid"">
       <div class="carousel-caption">
 <!--         <h3>New York</h3>
         <p>We love the Big Apple!</p> -->
@@ -277,7 +307,7 @@
     </div>
 
    <div class="carousel-item">
-      <img src="{% static 'img/4.JPG' %}" alt="New York" width="1100" height="500">
+      <img src="{% static 'img/6.jpg' %}" alt="New York" class="img-fluid">
       <div class="carousel-caption">
 <!--         <h3>New York</h3>
         <p>We love the Big Apple!</p> -->
@@ -285,7 +315,7 @@
     </div>
 
    <div class="carousel-item">
-      <img src="{% static 'img/5.JPG' %}" alt="New York" width="1100" height="500">
+      <img src="{% static 'img/7.jpg' %}" alt="New York" class="img-fluid">
       <div class="carousel-caption">
 <!--         <h3>New York</h3>
         <p>We love the Big Apple!</p> -->
@@ -293,7 +323,7 @@
     </div>
 
    <div class="carousel-item">
-      <img src="{% static 'img/6.JPG' %}" alt="New York" width="1100" height="500">
+      <img src="{% static 'img/8.jpg' %}" alt="New York" class="img-fluid">
       <div class="carousel-caption">
 <!--         <h3>New York</h3>
         <p>We love the Big Apple!</p> -->
@@ -301,7 +331,7 @@
     </div>
 
    <div class="carousel-item">
-      <img src="{% static 'img/7.JPG' %}" alt="New York" width="1100" height="500">
+      <img src="{% static 'img/9.jpg' %}" alt="New York" class="img-fluid">
       <div class="carousel-caption">
 <!--         <h3>New York</h3>
         <p>We love the Big Apple!</p> -->
@@ -309,23 +339,7 @@
     </div>
 
    <div class="carousel-item">
-      <img src="{% static 'img/8.JPG' %}" alt="New York" width="1100" height="500">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/9.JPG' %}" alt="New York" width="1100" height="500">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/10.JPG' %}" alt="New York" width="1100" height="500">
+      <img src="{% static 'img/10.jpg' %}" alt="New York" class="img-fluid">
       <div class="carousel-caption">
 <!--         <h3>New York</h3>
         <p>We love the Big Apple!</p> -->
@@ -341,11 +355,11 @@
   </a>
 </div>
           </div>
-          <div class="col-md-3">
-               
 
-    <figure class="figure" style="border: 1px solid lightgrey">
-    <img src="{% static 'img/12.JPG' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 13em;height: 13em">
+
+    <div class="col-md-3 hiddenmobile" id="hiddenmobile"> 
+    <figure class="figure hiddenmobile" style="border: 1px solid lightgrey">
+    <img src="{% static 'img/12.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 13em;height: 13em">
     
     <figcaption class="figure-caption" style="padding-left: 10px;">
     <a href="#">KOKO COLLECTION</a>
@@ -353,7 +367,7 @@
     </figcaption>
     </figure>
     <figure class="figure" style="border: 1px solid lightgrey">
-    <img src="{% static 'img/13.JPG' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 13em;height: 13em">
+    <img src="{% static 'img/13.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 13em;height: 13em">
     
     <figcaption class="figure-caption" style="padding-left: 10px;">
    <!--  <a href="#">KOKO COLLECTION</a> -->
@@ -361,7 +375,10 @@
     </figcaption>
     </figure>
     
-          </div>
+    </div>
+ <!--    end of col-md-3 -->
+
+
         </div>
       </div>
       <!-- end container fluid -->
@@ -371,9 +388,28 @@
   </div>
   <!-- /#wrapper -->
 
-
-<div class="container">
+<div class="container hiddenmobile" style="padding: 15px 15px">
   <div class="row">
+
+    <div class="col-md-3 col-xs-6 col-sm-6">
+      <img src="http://ecommerce.multitails.com/uploads/banner_image/default.jpg" class="img-fluid">
+    </div>
+     <div class="col-md-3 col-xs-6 col-sm-6">
+      <img src="http://ecommerce.multitails.com/uploads/banner_image/default.jpg" class="img-fluid">
+    </div>
+     <div class="col-md-3 col-xs-6 col-sm-6">
+      <img src="http://ecommerce.multitails.com/uploads/banner_image/default.jpg" class="img-fluid">
+    </div>
+     <div class="col-md-3 col-xs-6 col-sm-6">
+      <img src="http://ecommerce.multitails.com/uploads/banner_image/default.jpg" class="img-fluid">
+    </div>
+
+  </div>
+</div>
+
+
+<div class="container-fluid moveup" style="padding: 10 10" >
+  <div class="row" style="background: url(http://ecommerce.multitails.com/uploads/others/parralax_search.jpg) center top no-repeat; background-attachment:fixed; background-size:cover;">
     <div class="col-md-12">
       <center><h5>SEARCH FOR PRODUCTS AND SERVICES</h5></center>
 
@@ -459,7 +495,7 @@
 <div class="owl-carousel">
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/12.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -488,7 +524,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/13.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -517,7 +553,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/15.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -546,7 +582,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/16.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <center>
@@ -576,7 +612,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/18.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -605,7 +641,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/19.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -634,7 +670,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/20.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -683,7 +719,7 @@
 <div class="owl-carousel">
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/12.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -704,7 +740,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/13.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -722,7 +758,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/15.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -741,7 +777,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/16.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <center>
@@ -761,7 +797,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/18.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -780,7 +816,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/19.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -799,7 +835,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/20.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -839,7 +875,7 @@
 <div class="owl-carousel">
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/12.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -857,7 +893,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/13.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -875,7 +911,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/15.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -894,7 +930,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/16.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <center>
@@ -914,7 +950,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/18.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -933,7 +969,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/19.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -952,7 +988,7 @@
 </div>
 
 <div>     
-<figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+<figure class="figure" style="border: 1px solid lightgrey;">
 <img src="{% static 'img/20.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 <center>
 <figcaption class="figure-caption">
@@ -995,10 +1031,10 @@
 </ul>
 </div>
 <div class="col-md-4">
-  <img src="{% static 'img/category_27.jpg' %}" class="img-fluid" style="height: 20em; width: 20em;" >
+  <img src="{% static 'img/category_27.jpg' %}" class="img-fluid" style="height: 20em; width: 100%" >
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 hiddenmobile">
   <img src="{% static 'img/category28.jpg' %}" class="img-fluid" style="width: 10em; height: 10em">
   <img src="{% static 'img/category29.png' %}" class="img-fluid" style="width: 10em; height: 10em">
   <img src="{% static 'img/category30.png' %}" class="img-fluid" style="width: 10em; height: 10em">
@@ -1009,7 +1045,7 @@
 </div>
 <!-- end of row -->
 <hr>
-<div class="row">
+<div class="row hiddenmobile">
   <div class="col-md-4">
   <h5>Latest Products / Services</h5>
 
@@ -1181,7 +1217,7 @@
 
 <div class="owl-carousel">
   <div>     
-  <figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+  <figure class="figure" style="border: 1px solid lightgrey">
   <img src="{% static 'img/13.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 
   </figure>
@@ -1189,14 +1225,14 @@
 
 
   <div>     
-  <figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+  <figure class="figure" style="border: 1px solid lightgrey">
   <img src="{% static 'img/15.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 
   </figure>
   </div>
 
   <div>     
-  <figure class="figure" style="border: 1px solid lightgrey; width: 13em;">
+  <figure class="figure" style="border: 1px solid lightgrey;">
   <img src="{% static 'img/16.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
 
   </figure>
@@ -1214,12 +1250,14 @@
 </div> 
 <!-- end of container -->
 
-<footer style="background-color: green; color: white;">
+<footer style="background-color: green; color: white;padding: 3em 0em">
 <div class="container">
   <div class="row">
 
     <div class="col-md-3">
    <img src="{% static 'img/logo.png' %}" class="img-fluid" style="width: 10em;">
+   <br>
+   <br>
     <p>MultiTails is a platform where you can perform all kinds of business transactions in any currency and language of your choice. Aimed to build a border-less platform for all kinds of business transactions with wide coverage across the globe.</p>
 <div class="input-group mb-3">
   <input type="email" class="form-control" placeholder="Email address">
@@ -1230,7 +1268,7 @@
         
      
     </div>
-   <div class="col-md-3">
+   <div class="col-md-3 hiddenmobile">
   <center> <u><h6>CATEGORIES</h6></u></center><br>
    <ul style="list-style: none; padding: 0, 0, 0, 0,">
      <li>CATEGORIES</li>
@@ -1246,7 +1284,7 @@
 
 
     </div>
-   <div class="col-md-3">
+   <div class="col-md-3 hiddenmobile">
 
      <center> <u><h6>USEFUL LINKS</h6></u></center><br>
    <ul style="list-style: none; padding: 0, 0, 0, 0,">
@@ -1263,7 +1301,7 @@
 
      
     </div>
-   <div class="col-md-3">
+   <div class="col-md-3 hiddenmobile">
 
      <center> <u><h6>CONTACT US</h6></u></center>
      <p><b><i class="fa fa-home"></i> Address:</b> <br>39A Ayilara Street Off Ojuelegba Road, Surulere Lagos.</p>
@@ -1321,9 +1359,9 @@ var owl = $('.owl-carousel');
             navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
             responsive: {
                 0: {
-                    items: 1
+                    items: 2
                 },
-                600: {
+                490: {
                     items: 2
                 },
                 1000: {
