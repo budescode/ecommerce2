@@ -3,13 +3,13 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse ,QueryDict
 # from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from .forms import RegisterForm, LoginForm, SignupForm, EmailPasswordReset, ChangePasswordCodeForm, ChangePasswordForm, CreateProfieForm1
+from .forms import VendorRegistrationForm, LoginForm, SignupForm, EmailPasswordReset, ChangePasswordCodeForm, ChangePasswordForm, CreateProfieForm1
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.contrib.auth.decorators import login_required
 from datetime import *
 
-from .models import ChangePasswordCode, CreateProfie
+from .models import ChangePasswordCode, CreateProfie, Vendor
 from django.core.mail import send_mail
 import random
 import string
@@ -126,9 +126,7 @@ def activate(request):
 def register(request):
 	if request.method == 'POST':
 		# form = CreateProfieForm1(request.POST or None)
-		form = RegisterForm(request.POST or None, request.FILES or None)
-
-
+		form = SignupForm(request.POST or None, request.FILES or None)
 		if form.is_valid():
 			username  = form.cleaned_data.get("username")
 			email  = form.cleaned_data.get("email")
@@ -136,15 +134,51 @@ def register(request):
 			first_name  = form.cleaned_data.get("first_name")
 			last_name  = form.cleaned_data.get("last_name")
 			phone_number  = form.cleaned_data.get("phone_number")
-
-			new_user  = User.objects.create_user(username, email, password)
-			CreateProfie.objects.create(user=username, email=email, phone_number=phone_number, first_name=first_name, last_name=last_name)
-			return redirect('account:registration_success')
+			address_line_1  = form.cleaned_data.get("address_line_1")
+			address_line_2  = form.cleaned_data.get("address_line_2")
+			state  = form.cleaned_data.get("state")
+			country  = form.cleaned_data.get("country")
+			print('detaso', username, email, password)
+			new_user  = User.objects.create_user(username=username, email=email, password=password)
+			CreateProfie.objects.create(username=password,user=new_user, email=email, phone_number=phone_number, first_name=first_name, last_name=last_name, address_line_1=address_line_1, address_line_2=address_line_2, state=state, country=country)
+			messages.add_message(request, messages.INFO, 'Successfully Registered')
+			return redirect('account:login')
 
 	else:
-		form = RegisterForm(request.POST or None)
+		form = SignupForm(request.POST or None)
 	context = {"form": form}
 	return render(request, "account/register.html", context)
+
+def register_vendor(request):
+	if request.method == 'POST':
+		# form = CreateProfieForm1(request.POST or None)
+		form = VendorRegistrationForm(request.POST or None, request.FILES or None)
+		if form.is_valid():
+			username  = form.cleaned_data.get("username")
+			email  = form.cleaned_data.get("email")
+			password  = form.cleaned_data.get("password")
+			first_name  = form.cleaned_data.get("first_name")
+			last_name  = form.cleaned_data.get("last_name")
+			phone_number  = form.cleaned_data.get("phone_number")
+			address_line_1  = form.cleaned_data.get("address_line_1")
+			address_line_2  = form.cleaned_data.get("address_line_2")
+			state  = form.cleaned_data.get("state")
+			country  = form.cleaned_data.get("country")
+			company_name  = form.cleaned_data.get("company_name")
+			business_name  = form.cleaned_data.get("business_name")
+			
+			new_user  = User.objects.create_user(username=username, email=email, password=password)
+			CreateProfie.objects.create(username=password,user=new_user, email=email, phone_number=phone_number, first_name=first_name, last_name=last_name, address_line_1=address_line_1, address_line_2=address_line_2, state=state, country=country)
+			Vendor.objects.create(user=new_user, company_name=company_name, business_name=business_name)
+			messages.add_message(request, messages.INFO, 'Successfully Registered')
+			return redirect('account:login')
+
+	else:
+		form = VendorRegistrationForm(request.POST or None)
+	context = {"form": form}
+	return render(request, "account/register_vendor.html", context)
+
+
 
 @login_required(login_url='/account/login')
 def edit_profile(request):
@@ -176,38 +210,12 @@ def edit_profile(request):
 
 
 
-@login_required(login_url='/account/login')
+@login_required(login_url='/account/login/')
 def profile(request):
-	try:
 
-		qs = CreateProfie.objects.get(user=request.user.username)
-	# if qs.exists():
-		username = qs.user
-		first_name = qs.first_name
-		last_name = qs.last_name
-		email = qs.email
-		phone_number = qs.phone_number
-		image = qs.image
-		print(first_name)
-	except CreateProfie.DoesNotExist :
-	# else:
-		username = ''
-		first_name = ''
-		last_name = ''
-		email = ''
-		phone_number = ''
-		image = ''
-		print('doesnt exists')
-	context={'username':username, 'first_name':first_name, 'last_name':last_name, 'email':email, 'phone_number':phone_number, 'image':image}
-	return render(request, 'account/profile.html', context)
+	return render(request, 'account/profile.html')
 
-# def register(request):
-# 	if request.method == 'POST':
-# 		form = RegisterForm(request.POST or None)
-# 	else:
-# 		form = RegisterForm()
-# 	context={'form':form}
-# 	return render(request, "account/register.html", context)
+
 
 def registration_success(request):
 	return render(request, 'account/registration_success.html', {})
@@ -223,7 +231,7 @@ def login_page(request):
 			if user is not None:
 			 	if user.is_active:
 			 		login(request, user)
-			 		return redirect('administrator:administrator')
+			 		return redirect('account:profile')
 			 	else:
 			 		return HttpResponse('Disabled account')
 			else:
@@ -232,6 +240,34 @@ def login_page(request):
 		form = LoginForm()
 	context = {"form": form}
 	return render(request, "account/login.html", context)
+
+def login_page_vendor(request):
+	if request.method == 'POST':
+		form = LoginForm(request.POST or None)
+		if form.is_valid():
+			username  = form.cleaned_data.get("username")
+			password  = form.cleaned_data.get("password")
+			user = authenticate(username=username, password=password)
+			if user is not None:
+				if user.is_active:
+					try:
+						active = Vendor.objects.get(user=user)
+						if active.active == True:
+							login(request, user)
+							return redirect('account:profile')
+						else:
+							return HttpResponse('Your account have not been approved')
+					except Vendor.DoesNotExist:
+						return HttpResponse("you are not a vendor, please register as a vendor")			 		
+				else:
+			 		return HttpResponse('Disabled account')
+			else:
+				return HttpResponse('Invalid login')
+
+	else:
+		form = LoginForm()
+	context = {"form": form}
+	return render(request, "account/login_vendor.html", context)
 
 
 def logout_page(request):

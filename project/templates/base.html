@@ -1,0 +1,506 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Multitails</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.min.css' %}">
+<style>
+/* On screens that are 767px wide or less, the background color is olive */
+@media screen and (max-width: 767px) {
+  .hiddenmobile {
+    display: none;
+  }
+  .moveup{
+    margin-top: -4em;
+  }
+}
+
+/* On screens that are 767px wide or less, the background color is olive */
+@media screen and (max-width: 470px) {
+  
+  .moveup{
+    margin-top: -18em;
+  }
+}
+@media screen and (max-width: 500px) {
+  
+  .moveup{
+    margin-top: -18em;
+  }
+}
+
+
+.slidecontainer {
+  width: 100%;
+}
+
+
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+ul#menu li {
+  display:inline;
+  padding: 3px 4px;
+  font-size: 14px;
+  color: white;
+}
+ul#menu li a {
+color: white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<div class="row">
+  <div class="col-md-12" style="background-color: #3fab5d;color: white;">
+
+  <ul id="menu">
+  <li>English</li>
+  <li>U.S Dollar</li>
+  <li>Premium Packages</li>
+{% if request.user.is_authenticated %}
+<li class="float-sm-right">Wallet- $0.00</li>
+<li class="float-sm-right">|</li>
+<li class="float-sm-right">My Profile</li>
+<li class="float-sm-right">|</li>
+<li class="float-sm-right">Wish List</li>
+<li class="float-sm-right">|</li>
+<li class="float-sm-right">Faq</li>
+<li class="float-sm-right">|</li>
+<li class="float-sm-right"><a href="{% url 'account:logout' %}">Logout</a></li>
+{% else %}
+
+   <li>  <span class="float-sm-right" style="padding: 2px 5px">
+      
+        <a  style="color: white;" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sign up</a> 
+
+
+<!--       <li>|</li>
+      <li>sign up <i class="fa fa-caret"></i></li> -->
+<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+<a class="dropdown-item" href="#">Business Account</a>
+<a class="dropdown-item" href="#">Personal Account</a>
+
+</div>
+ </span>
+ </li>
+
+ {% endif %}
+
+
+
+
+
+
+
+</ul>  
+
+
+
+
+  </div>
+</div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="#">
+  <img src="{% static 'img/logo.png' %}" class="img-fluid" style="width: 10em;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+<li class="nav-item">
+<div class="input-group mt-3 mb-3">
+<input type="text" class="form-control" placeholder="What are you looking for?">
+  <div class="input-group-prepend">
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+      All categories
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Link 1</a>
+      <a class="dropdown-item" href="#">Link 2</a>
+      <a class="dropdown-item" href="#">Link 3</a>
+    </div>
+  </div>
+  <div class="input-group-prepend">
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+      Vendor
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Link 1</a>
+      <a class="dropdown-item" href="#">Link 2</a>
+      <a class="dropdown-item" href="#">Link 3</a>
+    </div>
+  </div>
+  <div class="input-group-append">
+    <button class="btn btn-success" type="submit"><i class="fa fa-search-plus"></i></button> 
+  </div>
+  
+</div>
+</li>
+</ul>
+
+
+<ul class="nav navbar-nav ml-auto">
+<li class="nav-item">
+<div class="input-group mt-3 mb-3">
+<input type="button" class="form-control" value="Compare">
+  <div class="input-group-prepend">
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle">
+    Items
+    </button>
+
+  </div>
+
+
+  
+</div>
+</li>
+</ul>
+
+    
+
+
+
+
+
+  </div>
+</nav>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <!-- <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button> -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;">
+                All Categories
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="font-size: 13px;">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">Featured Products/Services</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">All Categories <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">Today's Deal <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">Bundled Product/Service <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">Classified Ads <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">All Brands <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">All Vendors<span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">All Vendors Location <span class="sr-only">(current)</span></a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;">
+                Blogs
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="font-size: 13px;">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="#" style="font-size: 13px;">Contacu Us <span class="sr-only">(current)</span></a>
+            </li>
+
+
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+
+{% block body %}
+
+{% endblock %}
+
+
+
+
+
+
+<footer style="background-color: green; color: white;padding: 3em 0em">
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-3">
+   <img src="{% static 'img/logo.png' %}" class="img-fluid" style="width: 10em;">
+   <br>
+   <br>
+    <p>MultiTails is a platform where you can perform all kinds of business transactions in any currency and language of your choice. Aimed to build a border-less platform for all kinds of business transactions with wide coverage across the globe.</p>
+<div class="input-group mb-3">
+  <input type="email" class="form-control" placeholder="Email address">
+  <div class="input-group-append">
+    <button class="btn btn-success" type="submit">Subscribe</button> 
+  </div>
+</div>
+        
+     
+    </div>
+   <div class="col-md-3 hiddenmobile">
+  <center> <u><h6>CATEGORIES</h6></u></center><br>
+   <ul style="list-style: none; padding: 0, 0, 0, 0,">
+     <li>CATEGORIES</li>
+     <li>Automobile</li>
+     <li>Women fashion</li>
+     <li>Men fashion</li>
+     <li>Electronics</li>
+     <li>Skin Care Products</li>
+     <li>Web Development</li>
+
+   </ul>
+
+
+
+    </div>
+   <div class="col-md-3 hiddenmobile">
+
+     <center> <u><h6>USEFUL LINKS</h6></u></center><br>
+   <ul style="list-style: none; padding: 0, 0, 0, 0,">
+     <li>Home</li>
+     <li>All Products / Services</li>
+     <li>Featured Products / Services</li>
+     <li>Contact Us</li>
+     <li>Sell on Multitails</li>
+     <li>Make Money Online</li>
+     <li>Shop on Multitails</li>
+
+   </ul>
+
+
+     
+    </div>
+   <div class="col-md-3 hiddenmobile">
+
+     <center> <u><h6>CONTACT US</h6></u></center>
+     <p><b><i class="fa fa-home"></i> Address:</b> <br>39A Ayilara Street Off Ojuelegba Road, Surulere Lagos.</p>
+      <p><b><i class="fa fa-phone"></i> Phone:</b> <br>+234-07030330093</p>
+      <p><b><i class="fa fa-globe"></i>Website:</b><br>www.multitails.com</p>
+      <p><b><i class="fa fa-envelope"></i>Email:</b> <br>ask@multitails.com</p>
+        
+     
+    </div>
+
+  </div>
+</div>
+ </footer>
+<!-- end container-fluid -->
+
+
+
+  <!-- Bootstrap core JavaScript -->
+
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
+
+<script>
+$(document).ready(function(){
+  $('.toast').toast('show');
+});
+</script>
+
+<script>
+$(document).ready(function(){
+$(".owl-carousel").owlCarousel();
+});
+
+
+
+
+var owl = $('.owl-carousel');
+ $('.owl-carousel').owlCarousel({
+            margin: 10,
+            nav: true,
+      loop:true,
+      margin:10,
+      autoplay:true,
+      autoplayTimeout:3000,
+      autoplayHoverPause:true,
+            navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
+            responsive: {
+                0: {
+                    items: 2
+                },
+                490: {
+                    items: 2
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        });
+
+$('.play').on('click',function(){
+    owl.trigger('play.owl.autoplay',[1000])
+})
+$('.stop').on('click',function(){
+    owl.trigger('stop.owl.autoplay')
+})
+
+
+</script>
+
+
+
+
+
+<!-- slider script -->
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demoslide");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+
+var maxslider = document.getElementById("myRange2");
+var maxoutput = document.getElementById("demoslide2");
+maxoutput.innerHTML = maxslider.value;
+
+maxslider.oninput = function() {
+  maxoutput.innerHTML = this.value;
+}
+
+</script>
+
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+
+
+<script>
+  function DivHide(x){
+    qs1 = '#' + x
+    qs = document.querySelector(qs1)
+    qs.style.display = 'none'
+
+    hide = document.querySelector('#demo')
+    hide.style.display = 'block'
+  }
+
+  function DivShow(x){
+    qs1 = '#' + x
+    qs = document.querySelector(qs1)
+    qs.style.display = 'block'
+
+    hide = document.querySelector('#demo')
+    hide.style.display = 'none'
+  }
+</script>
+Div
+
+</body>
+
+</html>

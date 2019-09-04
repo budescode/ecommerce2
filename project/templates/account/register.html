@@ -1,4 +1,4 @@
- {% extends 'base2.html' %}
+ {% extends 'base.html' %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block body %}
@@ -21,93 +21,48 @@
 		<title>Register</title>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
-			<!--
-			CSS
-			============================================= -->
+		<style>
+			body{
+				background-color: rgb(245, 245, 245);
+			}
+		</style>
 
 		</head>
 		<body>
 
-			  <header id="header" id="home">
-			    <div class="container">
-			    	<div class="row align-items-center justify-content-between d-flex">
-				      <div id="logo">
-				        <a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
-				      </div>
-				      <nav id="nav-menu-container">
-				        <ul class="nav-menu">
-				          <li class="menu-active"><a href="#home">Home</a></li>
-				          <!-- <li><a href="#convert">About Us</a></li> -->
-<!-- 				          <li><a href="#feature">About Us</a></li>
-				          <li><a href="#price">Price</a></li> -->
-				          <li><a href="{% url 'account:login' %}">Login </a></li>
-				          <li><a href="{% url 'account:register' %}">Register </a></li>
-<!-- 				          <li class="menu-has-children"><a href="">Pages</a>
-				            <ul>
-				              <li><a href="generic.html">Generic</a></li>
-				              <li><a href="elements.html">Elements</a></li>
-				            </ul>
-				          </li> -->
-				        </ul>
-				      </nav><!-- #nav-menu-container -->		    		
-			    	</div>
-			    </div>
-			  </header><!-- #header -->
 
 			<!-- start banner Area -->
-			<section class="banner-area relative" id="home">
+			<section class="banner-area relative" id="home" style="margin: 15px 15px;">
 				<div class="overlay overlay-bg"></div>		
 				<div class="container">
+
 					<div class="row fullscreen d-flex align-items-center justify-content-start">
-						<div class="banner-content col-lg-6 col-md-6">
-<form method="post">
-{% csrf_token %}
+						<div class="banner-content col-lg-6 col-md-6 offset-md-3"  style="border: 1px solid lightgray;">
+							<div style="background-color: green;">
+							<img src="{% static 'img/banner.png' %}" class="img-fluid">
+							</div>
+							<form method="post">
+							<center>
+							<h5>SIGN IN</h5>
+							<br>
+					<small>Already A Member ? Click To <a href=""> Login!</a> Or <a href="">Sign Up As Vendor If You Have A Registered Business.</a> 
+					</small>	
+
+							</center>
+							<hr>
+<form method="post" enctype="multipart/form-data" action="{% url 'account:register' %}">{% csrf_token %}
 {{form|crispy}}
 
+<button type="submit" class="btn btn-primary btn-block">Register</button> 
 
-<button type="submit" class="btn btn-primary ">Register</button> 
-</form>	
+
+</form>
+	
 						</div>												
 					</div>
 				</div>
 			</section>
 			<!-- End banner Area -->	
-
-			
-
-			
-		
-	
-						
-
-
-			
-
-			<!-- Start callaction Area -->
-<!-- 			<section class="callaction-area section-gap" style="margin-top: 80px">
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-lg-9">
-							<h1 class="text-white">Huge Transaction in last Week</h1>
-							<p class="text-white">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore
-								magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-							</p>
-							<a href="#" class="primary-btn">Buy Bitcoin Now!</a>							
-						</div>
-					</div>
-				</div>	
-			</section> -->
-			<!-- End callaction Area -->
-			
-
-
-		
-
-
-					
-
-
 
 		</body>
 	</html>

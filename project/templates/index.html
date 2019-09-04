@@ -1,4 +1,6 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
+{% block body %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,172 +90,23 @@
 
 <body>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#">
-  <img src="{% static 'img/logo.png' %}" class="img-fluid" style="width: 10em;"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarText">
-    <ul class="navbar-nav mr-auto">
-<li class="nav-item">
-<div class="input-group mt-3 mb-3">
-<input type="text" class="form-control" placeholder="What are you looking for?">
-  <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-      All categories
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Link 1</a>
-      <a class="dropdown-item" href="#">Link 2</a>
-      <a class="dropdown-item" href="#">Link 3</a>
-    </div>
-  </div>
-  <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-      Vendor
-    </button>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Link 1</a>
-      <a class="dropdown-item" href="#">Link 2</a>
-      <a class="dropdown-item" href="#">Link 3</a>
-    </div>
-  </div>
-  <div class="input-group-append">
-    <button class="btn btn-success" type="submit"><i class="fa fa-search-plus"></i></button> 
-  </div>
-  
-</div>
-</li>
-</ul>
-
-
-<ul class="nav navbar-nav ml-auto">
-<li class="nav-item">
-<div class="input-group mt-3 mb-3">
-<input type="button" class="form-control" value="Compare">
-  <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown-toggle">
-    Items
-    </button>
-
-  </div>
-
-
-  
-</div>
-</li>
-</ul>
-
-    
 
 
 
 
 
-  </div>
-</nav>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <!-- <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button> -->
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;">
-                All Categories
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="font-size: 13px;">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">Featured Products/Services</a>
-            </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">All Categories <span class="sr-only">(current)</span></a>
-            </li>
-            
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">Today's Deal <span class="sr-only">(current)</span></a>
-            </li>
-            
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">Bundled Product/Service <span class="sr-only">(current)</span></a>
-            </li>
-            
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">Classified Ads <span class="sr-only">(current)</span></a>
-            </li>
-            
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">All Brands <span class="sr-only">(current)</span></a>
-            </li>
-            
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">All Vendors<span class="sr-only">(current)</span></a>
-            </li>
-            
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">All Vendors Location <span class="sr-only">(current)</span></a>
-            </li>
-
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;">
-                Blogs
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="font-size: 13px;">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-
-            <li class="nav-item active">
-              <a class="nav-link" href="#" style="font-size: 13px;">Contacu Us <span class="sr-only">(current)</span></a>
-            </li>
-
-
-
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
-</div>
 
 
 
   <div class="d-flex" id="wrapper">
 
-    <!-- Sidebar -->
+    <!-- Sidebar --> 
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
-        <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">AUTOMOBILE</a>
-        <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">WOMEN FASHION</a>
-        <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">MEN FASHION</a>
-        <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">ELECTRONICS</a>
+        <a href="#" onmouseover="DivShow('cardiv')" onmouseout="DivHide('cardiv')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">AUTOMOBILE</a>
+        <a href="#" onmouseover="DivShow('womenfashion')" onmouseout="DivHide('womenfashion')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">WOMEN FASHION</a>
+        <a href="#" onmouseover="DivShow('menfashion')" onmouseout="DivHide('menfashion')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">MEN FASHION</a>
+        <a href="#" onmouseover="DivShow('electronics')" onmouseout="DivHide('electronics')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">ELECTRONICS</a>
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">SKIN CARE PRODUCTS</a>
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">TOILETRIES</a>
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">PHONES AND ACCESSORIES</a>
@@ -274,88 +127,389 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-9">
-            <div id="demo" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
-  <div class="carousel-inner">
+
+
+
+
+
+
+
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+<ul class="carousel-indicators">
+<li data-target="#demo" data-slide-to="0" class="active"></li>
+<li data-target="#demo" data-slide-to="1"></li>
+<li data-target="#demo" data-slide-to="2"></li>
+</ul>
+<div class="carousel-inner">
 <!--     <div class="carousel-item active">
-      <img src="{% static 'img/1.JPG' %}" class="img-fluid" alt="Los Angeles">
-      <div class="carousel-caption">
+<img src="{% static 'img/1.JPG' %}" class="img-fluid" alt="Los Angeles">
+<div class="carousel-caption">
 
-      </div>   
-    </div> -->
-    <div class="carousel-item active">
-      <img src="{% static 'img/2.jpg' %}" alt="Chicago" class="img-fluid">
-      <div class="carousel-caption">
+</div>   
+</div> -->
+<div class="carousel-item active">
+<img src="{% static 'img/2.jpg' %}" alt="Chicago" class="img-fluid">
+<div class="carousel-caption">
 <!--         <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p> -->
-      </div>   
-    </div>
-
-
-
-
-   <div class="carousel-item">
-      <img src="{% static 'img/5.jpg' %}" alt="New York" class="img-fluid"">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/6.jpg' %}" alt="New York" class="img-fluid">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/7.jpg' %}" alt="New York" class="img-fluid">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/8.jpg' %}" alt="New York" class="img-fluid">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/9.jpg' %}" alt="New York" class="img-fluid">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-   <div class="carousel-item">
-      <img src="{% static 'img/10.jpg' %}" alt="New York" class="img-fluid">
-      <div class="carousel-caption">
-<!--         <h3>New York</h3>
-        <p>We love the Big Apple!</p> -->
-      </div>   
-    </div>
-
-  </div>
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
+<p>Thank you, Chicago!</p> -->
+</div>   
 </div>
-          </div>
 
+
+
+
+<div class="carousel-item">
+<img src="{% static 'img/5.jpg' %}" alt="New York" class="img-fluid"">
+<div class="carousel-caption">
+<!--         <h3>New York</h3>
+<p>We love the Big Apple!</p> -->
+</div>   
+</div>
+
+<div class="carousel-item">
+<img src="{% static 'img/6.jpg' %}" alt="New York" class="img-fluid">
+<div class="carousel-caption">
+<!--         <h3>New York</h3>
+<p>We love the Big Apple!</p> -->
+</div>   
+</div>
+
+<div class="carousel-item">
+<img src="{% static 'img/7.jpg' %}" alt="New York" class="img-fluid">
+<div class="carousel-caption">
+<!--         <h3>New York</h3>
+<p>We love the Big Apple!</p> -->
+</div>   
+</div>
+
+<div class="carousel-item">
+<img src="{% static 'img/8.jpg' %}" alt="New York" class="img-fluid">
+<div class="carousel-caption">
+<!--         <h3>New York</h3>
+<p>We love the Big Apple!</p> -->
+</div>   
+</div>
+
+<div class="carousel-item">
+<img src="{% static 'img/9.jpg' %}" alt="New York" class="img-fluid">
+<div class="carousel-caption">
+<!--         <h3>New York</h3>
+<p>We love the Big Apple!</p> -->
+</div>   
+</div>
+
+<div class="carousel-item">
+<img src="{% static 'img/10.jpg' %}" alt="New York" class="img-fluid">
+<div class="carousel-caption">
+<!--         <h3>New York</h3>
+<p>We love the Big Apple!</p> -->
+</div>   
+</div>
+
+</div>
+<a class="carousel-control-prev" href="#demo" data-slide="prev">
+<span class="carousel-control-prev-icon"></span>
+</a>
+<a class="carousel-control-next" href="#demo" data-slide="next">
+<span class="carousel-control-next-icon"></span>
+</a>
+</div>
+
+  <div class="table-responsive" style="display: none;" id="cardiv">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>CAR</th>
+          <th>RACING CAR</th>
+          <th>LUXURY SUV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+       </tr>
+       <tr>
+          <td>Ford</td>
+          <td>Ford</td>
+          <td>Ford</td>
+       </tr>
+       <tr>
+          <td>Nissan</td>
+          <td>Nissan</td>
+          <td>Nissan</td>
+       </tr>
+       <tr>
+          <td>Audi</td>
+          <td>Audi</td>
+          <td>Audi</td>
+       </tr>
+       <tr>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+       </tr>
+       <tr>
+          <td>BMW</td>
+          <td>BMW</td>
+          <td>BMW</td>
+       </tr>
+       <tr>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+       </tr>
+
+       <tr>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+       </tr>
+       <tr>
+          <td>Toyota</td>
+          <td>Toyota</td>
+          <td>Toyota</td>
+       </tr>
+       <tr>
+          <td>Honda</td>
+          <td>Honda</td>
+          <td>Honda</td>
+       </tr>
+       <tr>
+          <td>Volvo</td>
+          <td>Volvo</td>
+          <td>Volvo</td>
+       </tr>
+
+      </tbody>
+    </table>
+    </div> 
+
+
+    <div class="table-responsive" style="display: none;" id="womenfashion">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>PARTY DRESS</th>
+          <th>WOMEN SECRET</th>
+          <th>SLEEPING DRESS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+       </tr>
+       <tr>
+          <td>Ford</td>
+          <td>Ford</td>
+          <td>Ford</td>
+       </tr>
+       <tr>
+          <td>Nissan</td>
+          <td>Nissan</td>
+          <td>Nissan</td>
+       </tr>
+       <tr>
+          <td>Audi</td>
+          <td>Audi</td>
+          <td>Audi</td>
+       </tr>
+       <tr>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+       </tr>
+       <tr>
+          <td>BMW</td>
+          <td>BMW</td>
+          <td>BMW</td>
+       </tr>
+       <tr>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+       </tr>
+
+       <tr>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+       </tr>
+       <tr>
+          <td>Toyota</td>
+          <td>Toyota</td>
+          <td>Toyota</td>
+       </tr>
+       <tr>
+          <td>Honda</td>
+          <td>Honda</td>
+          <td>Honda</td>
+       </tr>
+       <tr>
+          <td>Volvo</td>
+          <td>Volvo</td>
+          <td>Volvo</td>
+       </tr>
+
+      </tbody>
+    </table>
+    </div>
+
+
+
+    <div class="table-responsive" style="display: none;" id="electronics">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>CELL PHONE</th>
+          <th>TOOLS</th>
+          <th>MOBILE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+       </tr>
+       <tr>
+          <td>Ford</td>
+          <td>Ford</td>
+          <td>Ford</td>
+       </tr>
+       <tr>
+          <td>Nissan</td>
+          <td>Nissan</td>
+          <td>Nissan</td>
+       </tr>
+       <tr>
+          <td>Audi</td>
+          <td>Audi</td>
+          <td>Audi</td>
+       </tr>
+       <tr>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+       </tr>
+       <tr>
+          <td>BMW</td>
+          <td>BMW</td>
+          <td>BMW</td>
+       </tr>
+       <tr>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+       </tr>
+
+       <tr>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+       </tr>
+       <tr>
+          <td>Toyota</td>
+          <td>Toyota</td>
+          <td>Toyota</td>
+       </tr>
+       <tr>
+          <td>Honda</td>
+          <td>Honda</td>
+          <td>Honda</td>
+       </tr>
+       <tr>
+          <td>Volvo</td>
+          <td>Volvo</td>
+          <td>Volvo</td>
+       </tr>
+
+      </tbody>
+    </table>
+    </div>
+
+
+
+    <div class="table-responsive" style="display: none;" id="menfashion">
+    <table class="table table-sm">
+      <thead>
+        <tr>
+          <th>FORMAL DRESS</th>
+          <th>MEN'S SHOE</th>
+          <th>CASUAL DRESS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+          <td>Chevrolet</td>
+       </tr>
+       <tr>
+          <td>Ford</td>
+          <td>Ford</td>
+          <td>Ford</td>
+       </tr>
+       <tr>
+          <td>Nissan</td>
+          <td>Nissan</td>
+          <td>Nissan</td>
+       </tr>
+       <tr>
+          <td>Audi</td>
+          <td>Audi</td>
+          <td>Audi</td>
+       </tr>
+       <tr>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+          <td>Hyundai</td>
+       </tr>
+       <tr>
+          <td>BMW</td>
+          <td>BMW</td>
+          <td>BMW</td>
+       </tr>
+       <tr>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+          <td>Marcedes-Benz</td>
+       </tr>
+
+       <tr>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+          <td>Mitsubishi</td>
+       </tr>
+       <tr>
+          <td>Toyota</td>
+          <td>Toyota</td>
+          <td>Toyota</td>
+       </tr>
+       <tr>
+          <td>Honda</td>
+          <td>Honda</td>
+          <td>Honda</td>
+       </tr>
+       <tr>
+          <td>Volvo</td>
+          <td>Volvo</td>
+          <td>Volvo</td>
+       </tr>
+
+      </tbody>
+    </table>
+    </div>
+
+
+
+          </div>
+<!-- end col-md-9 -->
 
     <div class="col-md-3 hiddenmobile" id="hiddenmobile"> 
     <figure class="figure hiddenmobile" style="border: 1px solid lightgrey">
@@ -1250,169 +1404,11 @@
 </div> 
 <!-- end of container -->
 
-<footer style="background-color: green; color: white;padding: 3em 0em">
-<div class="container">
-  <div class="row">
-
-    <div class="col-md-3">
-   <img src="{% static 'img/logo.png' %}" class="img-fluid" style="width: 10em;">
-   <br>
-   <br>
-    <p>MultiTails is a platform where you can perform all kinds of business transactions in any currency and language of your choice. Aimed to build a border-less platform for all kinds of business transactions with wide coverage across the globe.</p>
-<div class="input-group mb-3">
-  <input type="email" class="form-control" placeholder="Email address">
-  <div class="input-group-append">
-    <button class="btn btn-success" type="submit">Subscribe</button> 
-  </div>
-</div>
-        
-     
-    </div>
-   <div class="col-md-3 hiddenmobile">
-  <center> <u><h6>CATEGORIES</h6></u></center><br>
-   <ul style="list-style: none; padding: 0, 0, 0, 0,">
-     <li>CATEGORIES</li>
-     <li>Automobile</li>
-     <li>Women fashion</li>
-     <li>Men fashion</li>
-     <li>Electronics</li>
-     <li>Skin Care Products</li>
-     <li>Web Development</li>
-
-   </ul>
 
 
 
-    </div>
-   <div class="col-md-3 hiddenmobile">
-
-     <center> <u><h6>USEFUL LINKS</h6></u></center><br>
-   <ul style="list-style: none; padding: 0, 0, 0, 0,">
-     <li>Home</li>
-     <li>All Products / Services</li>
-     <li>Featured Products / Services</li>
-     <li>Contact Us</li>
-     <li>Sell on Multitails</li>
-     <li>Make Money Online</li>
-     <li>Shop on Multitails</li>
-
-   </ul>
-
-
-     
-    </div>
-   <div class="col-md-3 hiddenmobile">
-
-     <center> <u><h6>CONTACT US</h6></u></center>
-     <p><b><i class="fa fa-home"></i> Address:</b> <br>39A Ayilara Street Off Ojuelegba Road, Surulere Lagos.</p>
-      <p><b><i class="fa fa-phone"></i> Phone:</b> <br>+234-07030330093</p>
-      <p><b><i class="fa fa-globe"></i>Website:</b><br>www.multitails.com</p>
-      <p><b><i class="fa fa-envelope"></i>Email:</b> <br>ask@multitails.com</p>
-        
-     
-    </div>
-
-  </div>
-</div>
- </footer>
-<!-- end container-fluid -->
-
-
-
-  <!-- Bootstrap core JavaScript -->
-
-  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-<script src="{% static 'owlcarousel/owl.carousel.min.js' %}"></script>
-
-<script>
-$(document).ready(function(){
-  $('.toast').toast('show');
-});
-</script>
-
-<script>
-$(document).ready(function(){
-$(".owl-carousel").owlCarousel();
-});
-
-
-
-
-var owl = $('.owl-carousel');
- $('.owl-carousel').owlCarousel({
-            margin: 10,
-            nav: true,
-      loop:true,
-      margin:10,
-      autoplay:true,
-      autoplayTimeout:3000,
-      autoplayHoverPause:true,
-            navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
-            responsive: {
-                0: {
-                    items: 2
-                },
-                490: {
-                    items: 2
-                },
-                1000: {
-                    items: 5
-                }
-            }
-        });
-
-$('.play').on('click',function(){
-    owl.trigger('play.owl.autoplay',[1000])
-})
-$('.stop').on('click',function(){
-    owl.trigger('stop.owl.autoplay')
-})
-
-
-</script>
-
-
-
-
-
-<!-- slider script -->
-<script>
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demoslide");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}
-
-var slider = document.getElementById("myRange2");
-var output = document.getElementById("demoslide2");
-output.innerHTML = slider.value;
-
-slider.oninput = function() {
-  output.innerHTML = this.value;
-}
-
-</script>
-
-
-  <!-- Menu Toggle Script -->
-  <script>
-    $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });
-  </script>
 
 </body>
 
 </html>
+{% endblock %}

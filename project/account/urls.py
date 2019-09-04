@@ -25,22 +25,18 @@ urlpatterns = [
 	path('profile/', views.profile, name='profile'),
     path('settings/', views.SettingsView, name='settings'),
     path('changeprofile/', views.ChangeProfileView, name='changeprofile'),
+	path('register_vendor/', views.register_vendor, name='register_vendor'),
 
 
 	path('login/', views.login_page, name='login'),
+	path('login_vendor/', views.login_page_vendor, name='login_vendor'),
 	path('logout/', views.logout_page, name='logout'),
 	path('logged_out/', views.logged_out, name='logged_out'),
 
 	path('register/', views.register, name='register'),
 	path('register_success/', views.registration_success, name='registration_success'),
 
-	# url('password_reset/$', include('django.contrib.auth.urls')),
-	url(r'^signup/$',views.sign_up, name='signup'),
-	url(r'^x-article/activation/',views.activate, name='activation'),
- 	# url(r'^register/$', views.register, name='register'),
- 	# url(r'^login/$',views.login_page, name='login'),
- 	# url(r'^logout/$',views.logout_page, name='logout'),
- 	# url(r'^profile/$',views.profile, name='profile'),
+
 
 
 
