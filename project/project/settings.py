@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'index',
     'administrator',
     'crispy_forms',
+    'ckeditor',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +64,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'project.processors.cartContextProcessors',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -148,3 +151,13 @@ EMAIL_PORT=587
 DEFAULT_FROM_EMAIL = 'gospeltruth18@gmail.com'
 
 SERVER_EMAIL = 'gospeltruth18@gmail.com'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 1000,
+    },
+}

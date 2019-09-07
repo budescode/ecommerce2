@@ -21,6 +21,12 @@
   <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
   <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.min.css' %}">
 <style>
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+
 /* On screens that are 767px wide or less, the background color is olive */
 @media screen and (max-width: 767px) {
   .hiddenmobile {
@@ -153,7 +159,7 @@ color: white;
   <div class="row">
     <div class="col-md-12">
       <nav class="navbar navbar-expand-lg">
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="{% url 'index:index' %}">
   <img src="{% static 'img/logo.png' %}" class="img-fluid" style="width: 10em;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -164,13 +170,15 @@ color: white;
 <div class="input-group mt-3 mb-3">
 <input type="text" class="form-control" placeholder="What are you looking for?">
   <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+    <button type="button" class="btn btn-outline-secondary dropdown dropdown-toggle" data-toggle="dropdown">
       All categories
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Link 1</a>
-      <a class="dropdown-item" href="#">Link 2</a>
-      <a class="dropdown-item" href="#">Link 3</a>
+    <a class="dropdown-item" href="{% url 'index:allcategories' %}">all categories</a>
+    {% for i in category %}
+    
+      <a class="dropdown-item" href="#">{{i}}</a>
+    {% endfor %}
     </div>
   </div>
   <div class="input-group-prepend">
@@ -178,9 +186,10 @@ color: white;
       Vendor
     </button>
     <div class="dropdown-menu">
-      <a class="dropdown-item" href="#">Link 1</a>
-      <a class="dropdown-item" href="#">Link 2</a>
-      <a class="dropdown-item" href="#">Link 3</a>
+  {% for i in vendor %}
+      <a class="dropdown-item" href="#">{{i}}</a>
+ 
+  {% endfor %} 
     </div>
   </div>
   <div class="input-group-append">
@@ -197,9 +206,63 @@ color: white;
 <div class="input-group mt-3 mb-3">
 <input type="button" class="form-control" value="Compare">
   <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown-toggle">
-    Items
-    </button>
+<!-- Button trigger modal -->
+
+<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+Items
+</button>
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title <span class="pull-right" style="float: right;">test</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            {% for i in contextcart %}
+            <div class="col-md-3">
+              <img src="{{i.image1.url}}" class="img-fluid">
+            </div>
+            <div class="col-md-7">
+              <h6>{{i.Product_title}}  |  Qty-{{i.quantity}} </h6> 
+            </div>
+            <div class="col-md-2">
+             <h6>{{i.price}}</h6>
+            </div>
+            {% endfor %}
+
+
+          </div>
+<hr>
+          <div class="row">
+            <div class="col-md-3">
+              <h6>SUB TOTAL</h6>
+            </div>
+            <div class="col-md-3 offset-md-6">
+              {{contextcart_price}}
+            </div>
+            
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   </div>
 
@@ -238,22 +301,23 @@ color: white;
 
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;">
+              <a class="nav-link dropdown-toggle" href="#" id="allcategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 13px;">
                 All Categories
               </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="font-size: 13px;">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="allcategories" style="font-size: 13px;">
+     <a class="dropdown-item" href="{% url 'index:allcategories' %}">all categories</a>
+    {% for i in category %}
+
+      <a class="dropdown-item" href="#">{{i}}</a>
+    {% endfor %}
               </div>
             </li>
             <li class="nav-item active">
               <a class="nav-link" href="#" style="font-size: 13px;">Featured Products/Services</a>
             </li>
-            <li class="nav-item active">
+<!--             <li class="nav-item active">
               <a class="nav-link" href="#" style="font-size: 13px;">All Categories <span class="sr-only">(current)</span></a>
-            </li>
+            </li> -->
             
             <li class="nav-item active">
               <a class="nav-link" href="#" style="font-size: 13px;">Today's Deal <span class="sr-only">(current)</span></a>

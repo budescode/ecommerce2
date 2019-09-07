@@ -1,0 +1,457 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Multitails</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/simple-sidebar.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'owlcarousel/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'owlcarousel/owl.theme.default.min.css' %}">
+<style>
+/* On screens that are 767px wide or less, the background color is olive */
+@media screen and (max-width: 767px) {
+  .hiddenmobile {
+    display: none;
+  }
+  .moveup{
+    margin-top: -4em;
+  }
+}
+
+/* On screens that are 767px wide or less, the background color is olive */
+@media screen and (max-width: 470px) {
+  
+  .moveup{
+    margin-top: -18em;
+  }
+}
+@media screen and (max-width: 500px) {
+  
+  .moveup{
+    margin-top: -18em;
+  }
+}
+
+
+.slidecontainer {
+  width: 100%;
+}
+
+
+
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar --> 
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="list-group list-group-flush">
+      {% for i in category %}
+        <a href="{% url 'index:category' i.id %}" onmouseover="DivShow('cardiv')" onmouseout="DivHide('cardiv')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">{{i.name|upper}}</a>
+      {% endfor %}
+
+
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+
+
+      <div class="container-fluid">
+
+
+
+<div class="row">
+    <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h1 class="modal-title">Modal Heading</h1>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+        <div class="comtainer-fluid">
+          <div class="row">
+            
+
+<div class="col-md-2">
+  <img src="http://127.0.0.1:8000/media/blue-sky.jpg" class="img-fluid">
+</div>
+<div class="col-md-4">
+  <img src="" class="img-fluid" id="modal-image">
+</div>
+
+<div class="col-md-6" >
+  <p id="modal-description">
+    
+  </p>
+
+  <p id="modaluser"></p>
+
+  <p ><span id="modal-category"></span> | <span id="modal-subcategory"></span> | <span id="modal-brand"></span></p>
+  <h6>Sold By: <span id="modal-vendor"></span> </h6> 
+<hr>
+Price: <span id="modal-price"></span>
+<hr>
+
+<form>
+<label>Quantity</label><br>
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      
+      <span class="input-group-text"><button type="button" class="btn btn-success btn-sm" onclick="decreaseQuantity()"><i class="fa fa-minus"></i></button> </span>
+      </div>
+      <input type="text" class="form-control" placeholder="1" value=1 id="quantity">
+      <div class="input-group-prepend">
+      <button type="button" class="btn btn-success btn-sm" onclick="increaseQuantity()"><i class="fa fa-plus"></i></button>
+      </div>
+  </div>
+</form>
+
+<br>
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-success" onclick="addToCart()"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+
+  </div>
+  <div class="btn-group mr-2" role="group" aria-label="Second group">
+    <button type="button" class="btn btn-success"> <i class="fa fa-heart"></i>Add To Wishlist</button>
+
+  </div>
+
+  <div class="spinner-border" role="status" style="display: none;" id="spinner">
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div class="alert alert-primary" role="alert" style="display: none;" id="alert">
+ Added To Cart
+</div>
+<!--   <div class="btn-group" role="group" aria-label="Third group">
+    <button type="button" class="btn btn-secondary">8</button>
+  </div> -->
+</div>
+
+
+<hr>
+
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary" style="background-color: #3b5998"><i class="fa fa-facebook"></i></button>
+  </div>
+
+  <div class="btn-group mr-2" role="group" aria-label="Second group">
+   <button type="button" class="btn btn-secondary" style="background-color: #00aced;"><i class="fa fa-twitter"></i></button>
+  </div>
+
+ <div class="btn-group mr-2" role="group" aria-label="Second group">
+   <button type="button" class="btn btn-secondary" style="background-color: #dd4b39;"><i class="fa fa-google-plus"></i></button>
+  </div>
+
+
+  <div class="btn-group" role="group" aria-label="Third group">
+   <button type="button" class="btn btn-secondary" style="background-color: #bc2a8d;"><i class="fa fa-instagram"></i></button>
+  </div>
+
+ <div class="btn-group" role="group" aria-label="Fourth group">
+   <button type="button" class="btn btn-secondary" style="background-color: #007bb6;"><i class="fa fa-linkedin"></i></button>
+  </div>
+
+</div>
+
+
+<p>
+ <a href="">View Details</a> 
+</p>
+
+
+</div>
+<!-- end col-md-6 -->
+          </div>
+        </div>
+        </div>
+        <!-- end modal body
+ -->
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+        <div class="row">
+
+
+
+
+
+        {% for i in details %}
+       
+          <div class="col-md-6 col-sm-6 col-lg-3">
+
+          
+
+<figure class="figure" style="border: 1px solid lightgrey;">
+<img src="{{i.image1.url}}" class="figure-img img-fluid rounded" alt="Car image" style="width: 300px; height: 230px" id='image{{i.id}}'>
+<center>
+<figcaption class="figure-caption">
+<h6 id='title{{i.id}}'>{{i.Product_title}}</h6>
+
+<hr>
+<h6>$<span id='price{{i.id}}'>{{i.price}}</span></h6>
+<h6 id="description{{i.id}}" style="display: none;">{{ i.description|safe }}</h6>
+<p id="vendor{{i.id}}" style="display: none;">{{i.vendor}}</p>
+<p id="category{{i.id}}" style="display: none;">{{i.category.name}}</p>
+<p id="subcategory{{i.id}}" style="display: none;">{{i.subcategory.subcategory}}</p>
+<p id='vendoruser'>{{i.vendor.user}}</p>
+
+<p id="brand{{i.id}}" style="display: none;">{{i.brand.name}}</p>
+<p id="product_id" style="display: none;">{{i.id}}</p>
+
+<hr>
+<p>
+
+<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%">
+<i class="fa fa-filter" id='{{i.id}}' title="{{this.Product_title}}" style="font-size: 1.2em;cursor: pointer;" data-toggle="modal" data-target="#myModal" onclick="changeDetails(this)"></i>
+</span>
+
+<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%; margin-left: 10px; margin-right: 10px;">
+<i class="fa fa-heart" style="font-size: 1.2em;"></i>
+</span>
+<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%">
+<i class="fa fa-shopping-cart" style="font-size: 1.2em;"></i>
+</span>
+
+<!--  <i class="fa fa-heart" style="font-size: 1.5em;"></i> 
+ <i class="fa fa-shopping-cart" style="font-size: 1.5em;"></i> -->
+ </p>
+</figcaption>
+</center>
+</figure>
+         
+          </div>
+<!-- end col-md-3 -->
+
+
+ {% endfor %}
+
+
+
+        </div>
+      </div>
+      <!-- end container fluid -->
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+
+
+{% csrf_token %}
+
+
+
+
+<script>
+
+
+function increaseQuantity(){
+  quantity = document.querySelector('#quantity').value
+  quantity = Number(quantity)+1
+  document.querySelector('#quantity').value = quantity
+  console.log(quantity)
+
+}
+
+function decreaseQuantity(){
+  quantity = document.querySelector('#quantity').value
+  if(Number(quantity)>1){
+  quantity = Number(quantity)-1
+  document.querySelector('#quantity').value = quantity
+  }
+  console.log(quantity)
+
+}
+
+
+  function changeDetails(x){
+    document.querySelector('#spinner').style.display = 'none';
+    document.querySelector('#alert').style.display = 'none';
+    
+    price1='#price'
+    price = document.querySelector(price1+x.id).innerHTML
+    image1='#image'
+    image = document.querySelector(image1+x.id).src  
+    title1='#title'
+    title = document.querySelector(title1+x.id).innerHTML
+    description1='#description'
+    description = document.querySelector(description1+x.id).innerHTML
+    category1 = '#category'
+    category = document.querySelector(category1+x.id).innerHTML
+    subcategory1 = '#subcategory'
+    subcategory = document.querySelector(subcategory1+x.id).innerHTML
+    brand1 = '#brand'
+    brand = document.querySelector(brand1+x.id).innerHTML
+    vendor1 = '#vendor'
+    vendor = document.querySelector(vendor1+x.id).innerHTML
+    // product_id1 = '#product_id'
+    product_id = document.querySelector('#product_id').innerHTML 
+    product_id = x.id
+    vendoruser = document.querySelector('#vendoruser').innerHTML 
+ 
+
+
+
+    document.querySelector('.modal-title').innerHTML = title
+    document.querySelector('#modal-image').src = image
+    document.querySelector('#modal-category').innerHTML = category
+    document.querySelector('#modal-description').innerHTML = description
+    document.querySelector('#modal-subcategory').innerHTML = subcategory
+    document.querySelector('#modal-brand').innerHTML = brand
+    document.querySelector('#modal-vendor').innerHTML = vendor
+    document.querySelector('#modal-price').innerHTML = price
+    document.querySelector('#modaluser').innerHTML = vendoruser
+    console.log(vendoruser)
+    
+
+
+
+ 
+    console.log(product_id)
+
+  }
+
+
+  function addToCart(){
+
+document.querySelector('#spinner').style.display = 'block';
+Product_title = document.querySelector('.modal-title').innerHTML = title
+image1 = document.querySelector('#modal-image').src = image
+category = document.querySelector('#modal-category').innerHTML = category
+description = document.querySelector('#modal-description').innerHTML = description
+subcategory = document.querySelector('#modal-subcategory').innerHTML = subcategory
+brand = document.querySelector('#modal-brand').innerHTML = brand
+vendor = document.querySelector('#modal-vendor').innerHTML = vendor
+price = document.querySelector('#modal-price').innerHTML = price
+product_id = document.querySelector('#product_id').innerHTML
+token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+quantity = document.querySelector('#quantity').value
+vendoruser =  document.querySelector('#modaluser').innerHTML 
+  // var token = document.querySelector("#token").value
+  console.log(token, title, image1, category, description, subcategory, brand, vendor, price, product_id)
+  var url = 'http://127.0.0.1:8000/cart/'
+  let  formData = new FormData()
+  formData.append('vendor', vendor)
+  formData.append('Product_title', Product_title)
+  formData.append('category', category)
+  formData.append('subcategory', subcategory)
+  formData.append('description', description)
+  formData.append('brand', brand)
+  formData.append('price', price)
+  formData.append('image1', image1)
+  formData.append('quantity', quantity)
+  formData.append('vendoruser', vendoruser)
+
+
+  fetch(url,
+  {
+  body: new URLSearchParams(formData),
+  method: 'post',
+  headers:{
+  'X-CSRFTOKEN': token
+  }
+
+
+  }).then(res => res.json()).then(function(data) {
+
+  console.log(data)
+  document.querySelector('#spinner').style.display = 'none';
+  document.querySelector('#alert').style.display = 'block';
+  })
+  }
+</script>
+
+
+
+
+</body>
+
+</html>
+{% endblock %}

@@ -7,7 +7,11 @@ from django.urls import path
 
 app_name = "index"
 urlpatterns = [
-	path('home/', views.index, name='index'),
+	path('', views.index, name='index'),
+	path('allcategories/', views.allcategories, name='allcategories'),
+	path('category/<slug:id>/', views.category, name='category'),
+
+
 
 
 

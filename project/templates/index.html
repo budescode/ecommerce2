@@ -103,8 +103,10 @@
     <!-- Sidebar --> 
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
-        <a href="#" onmouseover="DivShow('cardiv')" onmouseout="DivHide('cardiv')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">AUTOMOBILE</a>
-        <a href="#" onmouseover="DivShow('womenfashion')" onmouseout="DivHide('womenfashion')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">WOMEN FASHION</a>
+      {% for i in category %}
+        <a href="{% url 'index:category' i.id %}" onmouseover="DivShow('cardiv')" onmouseout="DivHide('cardiv')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">{{i.name|upper}}</a>
+      {% endfor %}
+<!--         <a href="#" onmouseover="DivShow('womenfashion')" onmouseout="DivHide('womenfashion')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">WOMEN FASHION</a>
         <a href="#" onmouseover="DivShow('menfashion')" onmouseout="DivHide('menfashion')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">MEN FASHION</a>
         <a href="#" onmouseover="DivShow('electronics')" onmouseout="DivHide('electronics')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">ELECTRONICS</a>
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">SKIN CARE PRODUCTS</a>
@@ -113,7 +115,7 @@
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">WEB DEVELOPMENT</a>
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">GRAPHICS DESIGN</a>
         <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">HOME AND KITCHEN</a>
-        <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action">MORE CATEGORIES</a>
+        <a href="#" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action">MORE CATEGORIES</a> -->
 
       </div>
     </div>

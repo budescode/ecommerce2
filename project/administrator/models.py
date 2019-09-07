@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField 
+from account.models import Vendor
 
 # Create your models here.
 class Category(models.Model):
@@ -14,36 +17,37 @@ class SubCategory(models.Model):
 		return self.subcategory
 
 class Brand(models.Model):
+	subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='brand')
 	name=models.CharField(max_length=100)
 	image = models.ImageField()
+	def __str__(self):
+		return self.name
 
-class Vendor(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-	username = models.CharField(max_length=50)
-	email = models.EmailField(max_length=50)
-	company_name = models.CharField(max_length=100)
-	business_name = models.CharField(max_length=100, help_text='Registered business name')
-	first_name = models.CharField(max_length=50)
-	last_name = models.CharField(max_length=50)
-	phone_number = models.IntegerField()
-	address_line_1 = models.CharField(max_length=200)
-	address_line_2 = models.CharField(max_length=200, blank=True, null=True)
-	state = models.CharField(max_length=40)
-	country = models.CharField(max_length=40)
-	active = models.BooleanField(default=False)
+
 
 class VendorPost(models.Model):
-	category = models.ForeignKey(Category, on_delete=models.CASCADE)
-	subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE)	
-	name = models.CharField(max_length=60)
-	description = models.TextField()
-	price = models.IntegerField()
-	available_products = models.IntegerField()
-	image1 = models.ImageField(null=True, blank=True)
-	image2 = models.ImageField(null=True, blank=True)
-	image3 = models.ImageField(null=True, blank=True)
-	image4 = models.ImageField(null=True, blank=True)
-	image5 = models.ImageField(null=True, blank=True)
-	color = models.TextField(null=True, blank=True)
+	vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default=1, related_name='vendor_related_name')
+	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='vendoruser')
+	Product_title = models.CharField(max_length=100)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, related_name='vendorcategory')
+	subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, default=1, related_name='vendorsubcategory')	
+	brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
+	unit = models.CharField(max_length=30, help_text='Unit(e.g Kg, Pc, Etc')
+	tags = models.CharField(max_length=30)
+	description = RichTextUploadingField()
+	price = models.DecimalField(decimal_places=2, max_digits=15)
+	available_products = models.CharField(max_length=200)
+	image1 = models.ImageField(default='')
+	image2 = models.ImageField(null=True, blank=True, default='')
+	sale_price = models.DecimalField(decimal_places=2, max_digits=15)
+	purchase_price = models.DecimalField(decimal_places=2, max_digits=15)
+	shipping_cost = models.DecimalField(decimal_places=2, max_digits=15)
+	product_tax = models.DecimalField(decimal_places=2, max_digits=15)
+	product_discount = models.DecimalField(decimal_places=2, max_digits=15)
+	published = models.BooleanField(default=True)
+	featured = models.BooleanField(default=True)
+	color=models.CharField(max_length=20)
+
+
 
 

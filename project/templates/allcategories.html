@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<div class="container">
+	<div class="row">
+	{% for i in category %}
+		<div class="col-md-3 col-sm-6" style="margin-bottom: 20px;">
+			<div class="card" style="">
+			<div class="card-header">
+			<a href="{% url 'index:category' i.id %}"> {{i.name}} </a>
+			</div>
+			<ul class="list-group list-group-flush">
+			{% for a in subcategory %}
+			{% if a.category == i %}<li class="list-group-item"> {{a}} </li>{% endif %}
+			{% endfor %}
+			<li class="list-group-item">Dapibus ac facilisis in</li>
+			<li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+			</div>
+
+		</div>
+	{% endfor %}
+	</div>
+</div>
+
+{% endblock %}
