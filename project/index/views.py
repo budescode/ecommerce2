@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse,JsonResponse
 from administrator.models import Category, SubCategory, VendorPost, Brand, FeaturedProducts, ClassifiedAds
 from account.models import Vendor
+from django.db.models import Q
+
+
 
 def index(request):
 	category = Category.objects.all()
@@ -70,4 +73,43 @@ def blog(request):
 def contact_us(request):
 	return render(request, 'contact_us.html')
 
+
+def filter_items(request):
+	subcategory =SubCategory.objects.all()
+	category = Category.objects.all()
+	search = request.POST.get('search')
+	category1 = request.POST.get('category')
+	service = request.POST.get('service')
+	if service == 'Vendor':
+		searchcategory =  Vendor
+		queryset = Vendor.objects.filter( Q(company_name=search) or Q(business_name=search))
+	if category1 == 'All Categories':
+		queryset = VendorPost.objects.filter( Q(Product_title=search))
+
+
+	if service == "Products/Services":
+		searchcategory = VendorPost
+		queryset = VendorPost.objects.filter( Q(Product_title=search) or Q(category=category1))
+	
+	context = {'category':category, 'subcategory':subcategory, 'queryset':queryset } 
+	return render(request, 'filter_search.html', context)
+	
+def other_filtered_items(request):
+	subcategory =SubCategory.objects.all()
+	category = Category.objects.all()
+	minprice = request.POST.get('minprice')
+	maxprice = request.POST.get('maxprice')
+	search = request.POST.get('search')
+	category1 = request.POST.get('category')
+	subcategory1 = request.POST.get('subcategory')
+	if category1 == 'ALL CATEGORIES':
+		queryset = VendorPost.objects.filter( Q(Product_title=search))
+	else:		
+		category_qs = Category.objects.get(name=category1)	
+		brand1 = request.POST.get('brand')	
+		brand_qs = Brand.objects.get(name=brand1)
+		subcategory_qs = SubCategory.objects.get(subcategory=subcategory1)
+		queryset = VendorPost.objects.filter( Q(Product_title=search) and Q(category=category_qs) and Q(subcategory=subcategory_qs) and Q(brand=brand_qs))
+	context = {'queryset':queryset, 'minprice':minprice, 'maxprice':maxprice, 'subcategory':subcategory, 'category':category}
+	return render(request, 'other_filtered_products.html', context)
 

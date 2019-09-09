@@ -167,36 +167,33 @@ color: white;
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
 <li class="nav-item">
+
+<form action="{% url 'index:filter_items' %}" method="POST"> {% csrf_token %}
 <div class="input-group mt-3 mb-3">
-<input type="text" class="form-control" placeholder="What are you looking for?">
+<input type="text" class="form-control" placeholder="What are you looking for?" name="search">
   <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown dropdown-toggle" data-toggle="dropdown">
-      All categories
-    </button>
-    <div class="dropdown-menu">
-    <a class="dropdown-item" href="{% url 'index:allcategories' %}">all categories</a>
-    {% for i in category %}
-    
-      <a class="dropdown-item" href="#">{{i}}</a>
-    {% endfor %}
-    </div>
+  <select name="category" class="custom-select">
+    <option selected>All Categories</option>
+  {% for i in category %}  
+    <option value="{{i}}">{{i}}</option>
+{% endfor %}
+  </select>
+
   </div>
   <div class="input-group-prepend">
-    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
-      Vendor
-    </button>
-    <div class="dropdown-menu">
-  {% for i in vendor %}
-      <a class="dropdown-item" href="#">{{i}}</a>
- 
-  {% endfor %} 
-    </div>
+  <select name="service" class="custom-select">
+    <option selected value="Products/Services"> Products/Services</option>
+
+    <option value="Vendor">Vendor</option>
+
+  </select>
   </div>
   <div class="input-group-append">
     <button class="btn btn-success" type="submit"><i class="fa fa-search-plus"></i></button> 
-  </div>
-  
+  </div>  
 </div>
+</form>
+
 </li>
 </ul>
 
@@ -207,13 +204,17 @@ color: white;
 <input type="button" class="form-control" value="Compare">
   <div class="input-group-prepend">
 <!-- Button trigger modal -->
+<a href="{% url 'cart:cart_checkout' %}">
+<button type="button" class="btn btn-outline-secondary" >
+<i class="fa fa-shopping-cart"></i> Cart ({{contextcart_count}})
+</button>
+</a>
 
-<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">
+
+<!-- <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">
 Items
 </button>
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button> -->
+ -->
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -308,7 +309,7 @@ Items
      <a class="dropdown-item" href="{% url 'index:allcategories' %}">all categories</a>
     {% for i in category %}
 
-      <a class="dropdown-item" href="#">{{i}}</a>
+      <a class="dropdown-item" href="{% url 'index:category' i.id %}">{{i}}</a>
     {% endfor %}
               </div>
             </li>

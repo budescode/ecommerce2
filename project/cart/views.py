@@ -27,7 +27,14 @@ def add_to_cart(request):
 	image1 = request.POST.get('image1')
 	# color=models.CharField(max_length=20, default='')
 	quantity = request.POST.get('quantity')
-	Cart.objects.create(vendor=vendor, user=request.user, Product_title=Product_title,category=category, subcategory=subcategory, brand=brand, description=description,price=price, image1=image1,quantity=quantity )
-	print(vendor, Product_title, category, subcategory, brand, description, price, image1, quantity)
-	context = {'Product_title':Product_title, 'price':price, }	
+	Cart.objects.create(single_price=price, vendor=vendor, user=request.user, Product_title=Product_title,category=category, subcategory=subcategory, brand=brand, description=description,price=price*quantity, image1=image1,quantity=quantity )
+	total_cart = Cart.objects.filter(user=request.user, order=False, paid=False )
+	context = {'Product_title':Product_title, 'price':price, 'total_cart':total_cart }	
 	return JsonResponse(context)
+
+def cart_checkout(request):
+	cart = Cart.objects.filter(user=request.user, paid=False)
+	a = 0
+	for i in cart:
+		a+=i.price
+	return render(request, 'cart/cart.html', {'cart':cart, 'total_cart':a})

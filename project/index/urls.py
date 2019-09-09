@@ -19,6 +19,8 @@ urlpatterns = [
 	path('all-vendors-location/', views.all_vendors_location, name='all_vendors_location'),
 	path('blog/', views.blog, name='blog'),
 	path('contact-us/', views.contact_us, name='contact_us'),
+	path('filter-items/', views.filter_items, name='filter_items'),
+	path('filtered-items/', views.other_filtered_items, name='other_filtered_items'),
 
 
 

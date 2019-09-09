@@ -9,13 +9,15 @@
    <div class="list-group list-group-flush">
 
       <ul class="list-group list-group-flush">
-     
+     <form method="POST" action="{% url 'index:other_filtered_items' %}"> {% csrf_token %}
+     	
+   
 
 	<li class="list-group-item px-0">
 		<small>
 	<div class="form-group">
 	<label for="sel1">ALL CATEGORIES:</label>
-	<select class="form-control" id="selectcategory">
+	<select class="form-control" id="selectcategory" name="category">
 	<option>ALL CATEGORIES</option>
 	{% for i in category %}
 
@@ -28,8 +30,8 @@
 
 	<div class="form-group">
 	<small>
-	<label for="sel1">ALL CATEGORIES:</label>
-	<select class="form-control" id="selectsubcategory">
+	<label for="sel1">ALL SUB CATEGORIES:</label>
+	<select class="form-control" id="selectsubcategory" name="subcategory">
 	<option>ALL SUB CATEGORIES</option>
 	</select>
 	</small>
@@ -38,7 +40,7 @@
 <small>
 <div class="form-group">
 <label for="sel1">ALL BRANDS:</label>
-<select class="form-control" id="selectbrandcategory">
+<select class="form-control" id="selectbrandcategory" name="brand">
 <option>ALL BRANDS</option>
 </select>
 </div>
@@ -46,7 +48,7 @@
 
 	<small>
 	<div class="form-group">
-	<input type="text" value="what are you looking for" class="form-control" name="">
+	<input type="text" value="what are you looking for" class="form-control" name="search">
 	</div>
 	</small>
 
@@ -55,7 +57,7 @@
 		<div class="form-group">
 		<label for="selectpostcode">Minimum Price</label>
 		<div class="slidecontainer">
-		<input type="range" min="1" max="100000000" value="50" class="slider" id="myRange">
+		<input type="range" min="1" max="100000000" value="50" class="slider" id="myRange" name='minprice'>
 		<p>Value: <span id="demoslide"></span></p>
 		</div>
 		</div>
@@ -65,7 +67,7 @@
 		<div class="form-group">
   <label for="selectpostcode">Maximum Price</label>
   <div class="slidecontainer">
-  <input type="range" min="1" max="100000000" value="50" class="slider" id="myRange2">
+  <input type="range" min="1" max="100000000" value="50" class="slider" id="myRange2" name="maxprice" >
   <p>Value: <span id="demoslide2"></span></p>
   </div>
 		</div>
@@ -80,7 +82,7 @@
 
 
 
-
+  </form>
 
 	</li>
 
@@ -201,11 +203,16 @@ data1 = subcategorylist[i].split(", ")
 if(selectedcategory == data1[0]){
 	console.log('yesss')
 var option = document.createElement("option");
-// var option2 = document.createElement("option");
+var option2 = document.createElement("option");
 
 option.text = data1[1]
 option.value = data1[1]
+option2.text = 'ALL SUB CATEGORIES'
+option2.value = 'ALL SUB CATEGORIES'
+
 var select = document.querySelector("#selectsubcategory")
+
+
 select.appendChild(option);
 
 
