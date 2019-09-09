@@ -21,6 +21,7 @@ urlpatterns = [
 	path('delete/<slug:id>/', views.delete, name='delete'),
 	path('edit/<slug:id>/', views.edit, name='edit'),
 	path('details/<slug:id>/', views.details, name='details'),
+	path('settings/', views.settings, name='settings'),
 
 
 

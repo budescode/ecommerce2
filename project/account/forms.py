@@ -48,7 +48,9 @@ def make_salt():
     return ''.join(result)
 
 
-
+class EditVendorImage(forms.Form):
+    logo = forms.ImageField()
+    banner = forms.ImageField()
 
 
     

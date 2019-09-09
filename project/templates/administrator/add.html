@@ -146,9 +146,100 @@
 </div>
 <!-- ./wrapper -->
 
+<script>
+  brandlist = []
+  subcategorylist = []
+  // finalbrandlist = []
+  // finalsubcategorylist = []
+
+  {% for i in subcategory  %}
+  subcategorylist.push('{{i.category}}' + ', ' + '{{i.subcategory}}')
+  {% endfor %}
+
+  {% for i in brand  %}
+  brandlist.push('{{i.category}}' + ', ' + '{{i.subcategory}}' + ', ' + '{{i.name}}')
+  {% endfor %}
+  console.log(brandlist, subcategorylist)
+
+var selectcategory = document.querySelector("#id_category")
+selectcategory.addEventListener('change', subCategory)
+
+var selectsubcategory = document.querySelector("#id_subcategory")
+selectsubcategory.addEventListener('change', Brand)
+
+
+function Brand(){
+var categoryIndex = document.querySelector('#id_subcategory').selectedIndex;
+var selectedcategory = document.querySelector('#id_subcategory').options[categoryIndex].text;
+$('#selectbrandcategory').find('option').remove();
+
+for(i=0;i<brandlist.length; i++){
+data1 = brandlist[i].split(", ")
+if(selectedcategory == data1[1]){
+  console.log('yesss')
+var option = document.createElement("option");
+option.text = data1[2]
+option.value = data1[2]
+var select = document.querySelector("#selectbrandcategory")
+select.appendChild(option);
 
 
 
-<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
-<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+}
+// endif
+
+}
+
+// endfor
+}
+
+
+
+
+function subCategory(){
+var categoryIndex = document.querySelector('#id_category').selectedIndex;
+var selectedcategory = document.querySelector('#id_category').options[categoryIndex].text;
+console.log(selectedcategory)
+$('#id_subcategory').find('option').remove();
+
+for(i=0;i<subcategorylist.length; i++){
+data1 = subcategorylist[i].split(", ")
+if(selectedcategory == data1[0]){
+  console.log('yesss')
+var option = document.createElement("option");
+// var option2 = document.createElement("option");
+
+option.text = data1[1]
+option.value = data1[1]
+var select = document.querySelector("#id_subcategory")
+select.appendChild(option);
+
+
+
+}
+// endif
+
+}
+
+// endfor
+}
+
+
+</script> 
+
+
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock %}

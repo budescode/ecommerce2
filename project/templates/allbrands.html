@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body %}
+<style>
+	body{
+		background-color: rgb(245, 245, 245)
+	}
+</style>
+
+<body>
+<div class="container">
+	<div class="row">
+		{% for i in category %}
+			<div class="col-md-3" style="margin-bottom: 20px;">
+				<div class="card">
+				<div class="card-header">{{i}}</div>
+				{% for a in brand %}
+				{% if a.category == i %}
+				<div class="card-body"><img src="{{a.image.url}}" alt="image" height="50px" width="50px">  {{a}}</div> 
+				{% endif %}
+				{% endfor %}
+				
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+</body>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<h6>ADVANCED SEARCH</h6>
+   <div class="list-group list-group-flush">
+
+      <ul class="list-group list-group-flush">
+     
+
+	<li class="list-group-item px-0">
+		<small>
+	<div class="form-group">
+	<label for="sel1">ALL CATEGORIES:</label>
+	<select class="form-control" id="selectcategory">
+	<option>ALL CATEGORIES</option>
+	{% for i in category %}
+
+	<option>{{i}}</option>
+	
+	{% endfor %}
+	</select>
+	</div>
+	</small>
+
+	<div class="form-group">
+	<small>
+	<label for="sel1">ALL CATEGORIES:</label>
+	<select class="form-control" id="selectsubcategory">
+	<option>ALL SUB CATEGORIES</option>
+	</select>
+	</small>
+	</div>
+
+<small>
+<div class="form-group">
+<label for="sel1">ALL BRANDS:</label>
+<select class="form-control" id="selectbrandcategory">
+<option>ALL BRANDS</option>
+</select>
+</div>
+</small>
+
+	<small>
+	<div class="form-group">
+	<input type="text" value="what are you looking for" class="form-control" name="">
+	</div>
+	</small>
+
+
+		<small>
+		<div class="form-group">
+		<label for="selectpostcode">Minimum Price</label>
+		<div class="slidecontainer">
+		<input type="range" min="1" max="100000000" value="50" class="slider" id="myRange">
+		<p>Value: <span id="demoslide"></span></p>
+		</div>
+		</div>
+		</small>
+
+		<small>
+		<div class="form-group">
+  <label for="selectpostcode">Maximum Price</label>
+  <div class="slidecontainer">
+  <input type="range" min="1" max="100000000" value="50" class="slider" id="myRange2">
+  <p>Value: <span id="demoslide2"></span></p>
+  </div>
+		</div>
+		</small>
+
+
+	<small>
+	<div class="form-group">
+	<input type="submit" value="Submit" class="btn btn-success btn-block" name="">
+	</div>
+	</small>
+
+
+
+
+
+	</li>
+
+        
+
+        </ul>
+  
+
+
+
+
+
+
+
+      </div>
+		</div>
+		<div class="col-md-9">
+			<div class="row">
+				{% for i in featured %}
+				<div class="col-md-3">
+					<div>     
+					<figure class="figure" style="border: 1px solid lightgrey;">
+					<img src="{% static 'img/16.jpg' %}" class="figure-img img-fluid rounded" alt="Car image" style="width: 200px; height: 200px">
+					<center>
+					<center>
+					<figcaption class="figure-caption">
+					<h6>{{i.Product_title}}</h6>
+					<hr>
+					<h6>#{{i.price}}</h6>
+					<p>{{i.vendor}}</p>
+					<hr>
+					<p>
+					<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%">
+					<i class="fa fa-filter" style="font-size: 1.2em;"></i>
+					</span>
+					<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%; margin-left: 10px; margin-right: 10px;">
+					<i class="fa fa-heart" style="font-size: 1.2em;"></i>
+					</span>
+					<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%">
+					<i class="fa fa-shopping-cart" style="font-size: 1.2em;"></i>
+					</span>
+					</p>
+					</figcaption>
+					</center>
+					</figure>
+					</div>
+				</div>
+
+				{% endfor %}
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
+
+
+<script>
+	brandlist = []
+	subcategorylist = []
+	// finalbrandlist = []
+	// finalsubcategorylist = []
+
+	{% for i in subcategory  %}
+	subcategorylist.push('{{i.category}}' + ', ' + '{{i.subcategory}}')
+	{% endfor %}
+
+	{% for i in brand  %}
+	brandlist.push('{{i.category}}' + ', ' + '{{i.subcategory}}' + ', ' + '{{i.name}}')
+	{% endfor %}
+
+
+	console.log(brandlist)
+var selectcategory = document.querySelector("#selectcategory")
+selectcategory.addEventListener('change', subCategory)
+
+var selectsubcategory = document.querySelector("#selectsubcategory")
+selectsubcategory.addEventListener('change', Brand)
+
+
+function Brand(){
+var categoryIndex = document.querySelector('#selectsubcategory').selectedIndex;
+var selectedcategory = document.querySelector('#selectsubcategory').options[categoryIndex].text;
+$('#selectbrandcategory').find('option').remove();
+
+for(i=0;i<brandlist.length; i++){
+data1 = brandlist[i].split(", ")
+if(selectedcategory == data1[1]){
+	console.log('yesss')
+var option = document.createElement("option");
+option.text = data1[2]
+option.value = data1[2]
+var select = document.querySelector("#selectbrandcategory")
+select.appendChild(option);
+
+
+
+}
+// endif
+
+}
+
+// endfor
+}
+
+
+
+
+function subCategory(){
+var categoryIndex = document.querySelector('#selectcategory').selectedIndex;
+var selectedcategory = document.querySelector('#selectcategory').options[categoryIndex].text;
+console.log(selectedcategory)
+$('#selectsubcategory').find('option').remove();
+
+for(i=0;i<subcategorylist.length; i++){
+data1 = subcategorylist[i].split(", ")
+if(selectedcategory == data1[0]){
+	console.log('yesss')
+var option = document.createElement("option");
+// var option2 = document.createElement("option");
+
+option.text = data1[1]
+option.value = data1[1]
+var select = document.querySelector("#selectsubcategory")
+select.appendChild(option);
+
+
+
+}
+// endif
+
+}
+
+// endfor
+}
+
+
+</script>
+
+
+
+{% endblock %}

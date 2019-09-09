@@ -70,7 +70,7 @@ def sign_up(request):
 
 @login_required(login_url='/account/login/')
 def SettingsView(request):
-    qs = CreateProfie.objects.get(user=request.user.username)
+    qs = CreateProfie.objects.get(user=request.user)
     return render(request, 'account/settings.html', {'qs':qs})
 
 @login_required(login_url='/account/login')
@@ -79,7 +79,7 @@ def ChangeProfileView(request):
     last_name = request.POST.get('last_name')
     email = request.POST.get('email')
     if email == request.user.email:
-        qs = CreateProfie.objects.get(user=request.user.username)
+        qs = CreateProfie.objects.get(user=request.user)
         qs.first_name = first_name
         qs.last_name = last_name
         qs.save()

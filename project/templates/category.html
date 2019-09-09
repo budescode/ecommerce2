@@ -100,12 +100,84 @@
 
   <div class="d-flex" id="wrapper">
 
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
     <!-- Sidebar --> 
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="list-group list-group-flush">
+
+      <ul class="list-group list-group-flush">
+              
+<!-- 
+          <li class="list-group-item px-0">
+            <a style="color: black;font-weight: bold;font-size: .77em;color: green;" href="" class="btn" data-toggle="collapse" href="#collapse{{i.id}}" role="button" aria-expanded="true" aria-controls="collapse{{i.id}}">
+              <span class="mr-3"></span> {{i.name|upper}}
+            </a>
+          
+            <div class="collapse" id="collapse{{i.id}}">
+              <div class="card card-body mt-2">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
+            </div>
+          </li> -->
+
+     
       {% for i in category %}
-        <a href="{% url 'index:category' i.id %}" onmouseover="DivShow('cardiv')" onmouseout="DivHide('cardiv')" style="color: black;font-weight: bold;font-size: .77em;color: green;" class="list-group-item list-group-item-action bg-light">{{i.name|upper}}</a>
-      {% endfor %}
+          <li class="list-group-item px-0">
+            <a class="btn" href="{% url 'index:category' i.id %}" style="color: black;font-weight: bold;font-size: .77em;color: green; cursor: pointer;" >
+            {{i.name|upper}}<span class="mr-3"></span>
+              </a>
+             <i style="cursor: pointer;" class="fa fa-caret-down" data-toggle="collapse" href="#collapseExample{{i.id}}" role="button" aria-expanded="true" aria-controls="collapseExample{{i.id}}"></i>
+
+            <div class="collapse" id="collapseExample{{i.id}}">
+              <div class="card card-body mt-2">
+              {{i}}
+
+              {% for a in subcategory %}
+{% if a.category == i %}
+          <div class="custom-control custom-checkbox mb-3">       
+
+          <input type="checkbox" onchange='handleChange(this);' class="custom-control-input {{a.category}}" id="customCheck{{a.id}}" name="{{a.category}}" checked value="{{a.subcategory}}">
+          <label class="custom-control-label" for="customCheck{{a.id}}">{{a.subcategory}}</label>
+         
+          </div>
+      {% endif %}
+           {% endfor %}
+
+              </div>
+            </div>
+          </li>
+           {% endfor %}
+          <li class="list-group-item px-0">
+            <a class="btn" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="true" aria-controls="collapseExample3">
+    Link with href <span class="mr-3"></span>
+  </a>
+            <div class="collapse" id="collapseExample3">
+              <div class="card card-body mt-2">
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+              </div>
+            </div>
+          </li>
+        </ul>
+  
+
+
+
+
+
 
 
       </div>
@@ -261,6 +333,13 @@ Price: <span id="modal-price"></span>
 
 
 
+
+
+
+
+
+
+
         {% for i in details %}
        
           <div class="col-md-6 col-sm-6 col-lg-3">
@@ -331,6 +410,102 @@ Price: <span id="modal-price"></span>
 
 <script>
 
+
+list1 = []
+list2 = []
+
+{% for i in qs %}
+list1.push('{{i.Product_title}}' + ', ' +  '{{i.category}}' + ', '  +  '{{i.image1}}' + ', ' +  '{{i.subcategory}}' + ', ' +  '{{i.brand.name}}' + ', ' +  '{{i.description|safe}}' + ', ' +  '{{i.price}}' )
+
+list2.push('{{i.Product_title}}' + ', ' +  '{{i.category}}' + ', '  +  '{{i.image1}}' + ', ' +  '{{i.subcategory}}' + ', ' +  '{{i.brand.name}}' + ', ' +  '{{i.description|safe}}' + ', ' +  '{{i.price}}')
+
+{% endfor %}
+
+reallist  = []
+
+// console.log(list1)
+
+list3 = []
+function handleChange(x){
+  val = x.name
+  data = "input[name=" + val + ']'
+  // data = '.'+val
+  // data = "input[name={0}]".format(val)
+  // "Hello, {0}!".format("World")
+//   name = document.querySelectorAll(data)
+// console.log(name)
+// for (var i = 0; i < name.length; ++i) {
+//   console.log('yeah', i.checked )
+// }
+
+// var arr = [1, 2, 3, 4, 5, 5, 6, 7, 8, 5, 9, 0, 2, 2];
+// console.log(list2)
+if (x.checked==false){
+for( var i = 0; i < list2.length; i++){ 
+  data1 = list2[i].split(", ")
+  item = data1[3]
+    
+
+        if ( x.value == item) {
+         list2.splice(i, 1); 
+         list3.push(list2[i])
+         // console.log(list2)
+          i--;
+          // console.log('false', list3)
+         }
+
+    }
+    console.log(list2, 'and', list3)
+    }
+    else{
+      
+        for( var i = 0; i < list3.length; i++){ 
+        data1 = list3[i].split(", ")
+        item = data1[3]
+
+
+        if ( x.value == item) {
+         list3.splice(i, 1); 
+         list2.push(list2[i])
+         console.log(list2[i])
+          i--;
+          // console.log('false', list3)
+         }
+
+        }
+        console.log('false', list2, 'and', list3)
+
+      
+
+    }
+
+
+
+
+
+// for (var i = 0; i < list2.length; i++) {
+//   data1 = list2[i].split(", ")
+//   item = data1[3]
+//   if (x.value == item){
+ 
+//   var index = list2.indexOf(list2[i]);
+//    // console.log(data1[3], 'yaga', index)
+//     if (index > -1) {
+//     list2.splice(index, 1);
+//     // a = list2.splice(i, index);
+//     console.log('is', index, list2.length, list2)
+//     i--;
+//     }
+// }
+// else{
+//   console.log('nah')
+// }
+// }
+
+
+
+}
+// end function
 
 function increaseQuantity(){
   quantity = document.querySelector('#quantity').value

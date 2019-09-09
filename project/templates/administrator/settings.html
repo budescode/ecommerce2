@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="index2.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>A</b>LT</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Multitails</b>Vendor</span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li class="">
+            <a href="{% url 'index:index' %}" class="dropdown-toggle" data-toggle="dropdown">
+              <i style="font-size: 20px;" class="fa fa-home"></i>
+              
+            </a>
+
+          </li>
+
+
+          <!-- User Account: style can be found in dropdown.less -->
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <img src="{% static 'administrator/dist/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
+              <span class="hidden-xs">{{request.user.username}}</span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="{% static 'administrator/dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+
+            
+              </li>
+
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+{% include 'administrator/sidebar.html' %}
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <section class="col-md-12 connectedSortable">
+
+
+<h3>Manage Product ( Physical )</h3>
+
+<a href="{% url 'administrator:products' %}" ><button class="btn btn-info btn-labeled fa fa-step-backward pull-right pro_list_btn"> Back To Product List</button></a>
+<br>
+<hr>
+
+
+
+        </section>
+
+        <!-- section -->
+
+      </div>
+      <!-- /.row (main row) -->
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#home">Product Details</a>
+  </li>
+
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane container active" id="home">
+    logo: <br>
+    <img src="{{vendor1.logo.url}}" width="100" height="100" class="img-fluid"> <hr>
+    <h6>Banner (width=1140, height=320)</h6>
+    <img src="{{vendor1.banner.url}}" width="1140" height="320" class="img-fluid">
+  <form method="post" enctype="multipart/form-data">
+  {{form|crispy}} {% csrf_token %}
+  <input type="submit" class="btn btn-primary" name="">
+  </form>
+  </div>
+
+</div>
+
+
+
+  </div>
+</div>
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+{% endblock %}

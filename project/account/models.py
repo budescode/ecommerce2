@@ -29,6 +29,9 @@ class Vendor(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, related_name='vendor_user')
 	company_name = models.CharField(max_length=100)
 	business_name = models.CharField(max_length=100, help_text='Registered business name')
+	logo = models.ImageField(default='default.jpg')
+	banner = models.ImageField(default='default.jpg')
 	active = models.BooleanField(default=False)
+
 	def __str__(self):
 		return self.company_name
