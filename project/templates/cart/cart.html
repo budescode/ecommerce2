@@ -174,31 +174,32 @@
   <div class="col-md-12">
     <h6>DELIVERY ADDRESS</h6>
 
-   <form>
+   <form method="POST" action="{% url 'order:create_order' %}"> {% csrf_token %}
+<!--     <input type="text" name="payment_method"> -->
         <div class="form-group row">
 
             <!-- Left column -->
 <!--             <label class="col-sm-2 col-form-label">Email</label> -->
             <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="First Name">
+                <input type="text" class="form-control" placeholder="First Name" name="first_name">
             </div>
 
             <!-- Right column -->
 
             <div class="col-sm-6">
-                <input type="text" class="form-control" placeholder="Last Name">
+                <input type="text" class="form-control" placeholder="Last Name" name="last_name">
             </div>
 
         </div>
 
         <div class="form-group row">
           <div class="col-sm-12">
-            <input type="text" class="form-control" placeholder="Address line 1">
+            <input type="text" class="form-control" placeholder="Address line 1" name="address_line_1">
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-12">
-            <input type="text" class="form-control" placeholder="Address line 2">
+            <input type="text" class="form-control" placeholder="Address line 2" name="address_line_2">
           </div>
         </div>
 
@@ -207,16 +208,16 @@
             <!-- Left column -->
 <!--             <label class="col-sm-2 col-form-label">Email</label> -->
             <div class="col-sm-4">
-                <input type="text" class="form-control" placeholder="Postcode">
+                <input type="text" class="form-control" placeholder="Postcode" name="Postcode">
             </div>
 
             <!-- Right column -->
 
             <div class="col-sm-4">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" class="form-control" placeholder="Email" name="email">
             </div>
           <div class="col-sm-4">
-              <input type="text" class="form-control" placeholder="Phone Number">
+              <input type="text" class="form-control" placeholder="Phone Number" name="phone_number">
           </div>
 
         </div>
@@ -238,9 +239,9 @@
 <div class="row" style="margin-bottom: 20px;">
   <div class="col-md-12">
     <h6>PAYMENT OPTIONS</h6>
-    <img src="{% static 'img/cash.jpg' %}" class="img-fluid" width="310" height="163">
-    <img src="{% static 'img/paystack.png' %}" class="img-fluid">
-    <img src="{% static 'img/flutterwave.png' %}" class="img-fluid">
+    <img src="{% static 'img/cash.jpg' %}" class="img-fluid" width="310" height="163" id="payment_on_delivery">
+    <img src="{% static 'img/paystack.png' %}" class="img-fluid" id="paystack">
+    <img src="{% static 'img/flutterwave.png' %}" class="img-fluid" id="flutterwave">
     <hr>
 
     <input type="Submit" value="CANCEL ORDER" class="btn btn-warning" name="">

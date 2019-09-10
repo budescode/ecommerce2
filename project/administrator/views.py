@@ -5,6 +5,7 @@ from .models import VendorPost, Brand, SubCategory, Category
 from account.models import Vendor
 from django.contrib.auth.decorators import login_required
 from account.forms import EditVendorImage
+from order.models import Order
 
 
 @login_required(login_url='/account/login/')
@@ -95,3 +96,8 @@ def settings(request):
 	context = {'form':form, 'vendor1':vendor1}
 
 	return render(request, 'administrator/settings.html', context)
+
+def sale(request):
+	vendor = Vendor.objects.get(user=request.user)
+	order = Order.objects.filter(vendor=vendor)
+	return render(request, 'administrator/sale.html', {'order':order})

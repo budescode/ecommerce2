@@ -206,7 +206,7 @@ color: white;
 <!-- Button trigger modal -->
 <a href="{% url 'cart:cart_checkout' %}">
 <button type="button" class="btn btn-outline-secondary" >
-<i class="fa fa-shopping-cart"></i> Cart ({{contextcart_count}})
+<i class="fa fa-shopping-cart"></i> Cart (<span id="cart_count">{{contextcart_count}}</span>)
 </button>
 </a>
 

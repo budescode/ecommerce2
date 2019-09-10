@@ -178,18 +178,18 @@
       
         <!-- Modal Header -->
         <div class="modal-header">
-          <h1 class="modal-title">Modal Heading</h1>
+          <!-- <h1 class="modal-title">Modal Heading</h1> -->
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
-        
+        <span class="modal-id" style="display: none;"></span>
         <!-- Modal body -->
         <div class="modal-body">
         <div class="comtainer-fluid">
           <div class="row">
             
 
-<div class="col-md-2">
-  <img src="http://127.0.0.1:8000/media/blue-sky.jpg" class="img-fluid">
+<div class="col-md-2 hiddenmobile">
+  <img src="" class="img-fluid" id="modal-image1">
 </div>
 <div class="col-md-4">
   <img src="" class="img-fluid" id="modal-image">
@@ -343,16 +343,21 @@ Price: <span id="modal-price"></span>
 <hr>
 <p>
 
-<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%">
-<i class="fa fa-filter" id='{{i.id}}' title="{{this.Product_title}}" style="font-size: 1.2em;cursor: pointer;" data-toggle="modal" data-target="#myModal" onclick="changeDetails(this)"></i>
-</span>
+<!-- <span style="background-color: green; color: white;padding: 5px 7px; border-radius: 100%">
+<i class="fa fa-eye" id='{{i.id}}' title="{{this.Product_title}}" style="font-size: 1.2em;cursor: pointer;" data-toggle="modal" data-target="#myModal" onclick="changeDetails(this)"></i>
 
-<span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%; margin-left: 10px; margin-right: 10px;">
+</span> -->
+<img src="{% static 'img/eye.jpg' %}" width="30" height="30" id='{{i.id}}' title="{{this.Product_title}}" style="cursor: pointer;" data-toggle="modal" data-target="#myModal" onclick="changeDetails(this)">
+<img src="{% static 'img/heart.png' %}" width="30" height="30">
+<img src="{% static 'img/cart.jpg' %}" width="30" height="30" id="{{i.id}}" class="cartimg{{i.id}}" onclick="changeDetails2(this)">
+<img src="{% static 'img/load-image.gif' %}" width="30" height="30" id="cart_img" style="display: none;" class="loading{{i.id}}" id="{{i.id}}">
+
+<!-- <span style="background-color: green; color: white;padding: 4px 6px 4px 10px; border-radius: 100%; margin-left: 10px; margin-right: 10px;">
 <i class="fa fa-heart" style="font-size: 1.2em;"></i>
 </span>
 <span style="background-color: green; color: white;padding: 5px 5px; border-radius: 100%">
 <i class="fa fa-shopping-cart" style="font-size: 1.2em;"></i>
-</span>
+</span> -->
 
 <!--  <i class="fa fa-heart" style="font-size: 1.5em;"></i> 
  <i class="fa fa-shopping-cart" style="font-size: 1.5em;"></i> -->
@@ -532,7 +537,11 @@ function decreaseQuantity(){
 
 
     document.querySelector('.modal-title').innerHTML = title
+    document.querySelector('.modal-id').innerHTML = product_id
+    
     document.querySelector('#modal-image').src = image
+    document.querySelector('#modal-image1').src = image
+    
     document.querySelector('#modal-category').innerHTML = category
     document.querySelector('#modal-description').innerHTML = description
     document.querySelector('#modal-subcategory').innerHTML = subcategory
@@ -550,8 +559,60 @@ function decreaseQuantity(){
 
   }
 
+  function changeDetails2(x){
+    cartimg = '.cartimg' + x.id
+    loading = '.loading'+x.id
+    // document.querySelector(cartimg).style.display = 'none';
+    document.querySelector(loading).style.display = 'block';
+    
+    price1='#price'
+    price = document.querySelector(price1+x.id).innerHTML
+    image1='#image'
+    image = document.querySelector(image1+x.id).src  
+    title1='#title'
+    title = document.querySelector(title1+x.id).innerHTML
+    description1='#description'
+    description = document.querySelector(description1+x.id).innerHTML
+    category1 = '#category'
+    category = document.querySelector(category1+x.id).innerHTML
+    subcategory1 = '#subcategory'
+    subcategory = document.querySelector(subcategory1+x.id).innerHTML
+    brand1 = '#brand'
+    brand = document.querySelector(brand1+x.id).innerHTML
+    vendor1 = '#vendor'
+    vendor = document.querySelector(vendor1+x.id).innerHTML
+    // product_id1 = '#product_id'
+    product_id = document.querySelector('#product_id').innerHTML 
+    product_id = x.id
+    vendoruser = document.querySelector('#vendoruser').innerHTML 
+ 
 
-  function addToCart(){
+
+
+    document.querySelector('.modal-title').innerHTML = title
+    document.querySelector('.modal-id').innerHTML = product_id
+    
+    document.querySelector('#modal-image').src = image
+    document.querySelector('#modal-category').innerHTML = category
+    document.querySelector('#modal-description').innerHTML = description
+    document.querySelector('#modal-subcategory').innerHTML = subcategory
+    document.querySelector('#modal-brand').innerHTML = brand
+    document.querySelector('#modal-vendor').innerHTML = vendor
+    document.querySelector('#modal-price').innerHTML = price
+    document.querySelector('#modaluser').innerHTML = vendoruser
+    console.log(vendoruser)
+    
+
+
+
+ 
+    // console.log(product_id)
+    addToCart2(x.id)
+
+  }
+
+
+function addToCart(){
 
 document.querySelector('#spinner').style.display = 'block';
 Product_title = document.querySelector('.modal-title').innerHTML = title
@@ -566,6 +627,8 @@ product_id = document.querySelector('#product_id').innerHTML
 token = document.querySelector("input[name=csrfmiddlewaretoken]").value
 quantity = document.querySelector('#quantity').value
 vendoruser =  document.querySelector('#modaluser').innerHTML 
+modal_id =  document.querySelector('.modal-id').innerHTML 
+console.log('iddd', modal_id)
   // var token = document.querySelector("#token").value
   console.log(token, title, image1, category, description, subcategory, brand, vendor, price, product_id)
   var url = 'http://127.0.0.1:8000/cart/'
@@ -579,7 +642,9 @@ vendoruser =  document.querySelector('#modaluser').innerHTML
   formData.append('price', price)
   formData.append('image1', image1)
   formData.append('quantity', quantity)
+
   formData.append('vendoruser', vendoruser)
+  formData.append('modal_id', modal_id)
 
 
   fetch(url,
@@ -596,8 +661,70 @@ vendoruser =  document.querySelector('#modaluser').innerHTML
   console.log(data)
   document.querySelector('#spinner').style.display = 'none';
   document.querySelector('#alert').style.display = 'block';
+  document.querySelector('#cart_count').innerHTML = data.total_cart;
+
   })
   }
+
+ function addToCart2(x){
+cartimg = '.cartimg' + x.id
+loading = '.loading'+x
+// document.querySelector(cartimg).style.display = 'none';
+// document.querySelector(loading).style.display = 'block';
+
+document.querySelector('#spinner').style.display = 'block';
+Product_title = document.querySelector('.modal-title').innerHTML = title
+image1 = document.querySelector('#modal-image').src = image
+category = document.querySelector('#modal-category').innerHTML = category
+description = document.querySelector('#modal-description').innerHTML = description
+subcategory = document.querySelector('#modal-subcategory').innerHTML = subcategory
+brand = document.querySelector('#modal-brand').innerHTML = brand
+vendor = document.querySelector('#modal-vendor').innerHTML = vendor
+price = document.querySelector('#modal-price').innerHTML = price
+product_id = document.querySelector('#product_id').innerHTML
+token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+quantity = document.querySelector('#quantity').value
+vendoruser =  document.querySelector('#modaluser').innerHTML 
+modal_id =  document.querySelector('.modal-id').innerHTML 
+console.log('iddd', modal_id)
+  // var token = document.querySelector("#token").value
+  console.log(token, title, image1, category, description, subcategory, brand, vendor, price, product_id)
+  var url = 'http://127.0.0.1:8000/cart/'
+  let  formData = new FormData()
+  formData.append('vendor', vendor)
+  formData.append('Product_title', Product_title)
+  formData.append('category', category)
+  formData.append('subcategory', subcategory)
+  formData.append('description', description)
+  formData.append('brand', brand)
+  formData.append('price', price)
+  formData.append('image1', image1)
+  formData.append('quantity', quantity)
+
+  formData.append('vendoruser', vendoruser)
+  formData.append('modal_id', modal_id)
+
+
+  fetch(url,
+  {
+  body: new URLSearchParams(formData),
+  method: 'post',
+  headers:{
+  'X-CSRFTOKEN': token
+  }
+
+
+  }).then(res => res.json()).then(function(data) {
+
+  console.log(data)
+  document.querySelector('#spinner').style.display = 'none';
+  document.querySelector('#alert').style.display = 'block';
+  document.querySelector('#cart_count').innerHTML = data.total_cart;
+  document.querySelector(loading).style.display = 'none';
+  })
+  }
+
+  
 </script>
 
 

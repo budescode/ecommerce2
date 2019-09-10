@@ -4,7 +4,7 @@ from account.models import Vendor
 from administrator.models import Category, SubCategory, Brand
 
 class Cart(models.Model):
-	vendor = models.CharField(max_length=100)
+	vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default=1)
 	user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='cartuser')
 	Product_title = models.CharField(max_length=100)
 	category = models.CharField(max_length=100)
@@ -21,3 +21,6 @@ class Cart(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
 	paid = models.BooleanField(default=False)
 	order = models.BooleanField(default=False)
+
+	def __str__(self):
+		return self.user.username
