@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.core import serializers
@@ -8,6 +8,9 @@ from .models import Cart
 from account.models import Vendor
 from administrator.models import VendorPost
 
+
+
+@login_required(login_url='/account/login/')
 def add_to_cart(request):
 
 	vendor = request.POST.get('vendor')
@@ -16,12 +19,6 @@ def add_to_cart(request):
 	qs = VendorPost.objects.get(id=int(modal_id))
 	vendor = qs.vendor
 	print(qs, vendor, 'qssss')
-	# vendor = User.object.get()
-
-	# vendoruser = request.POST.get('vendoruser')
-	# user = User.objects.get(username = vendoruser)
-	# vendor = Vendor.objects.get(user = user)
-
 	Product_title = request.POST.get('Product_title')
 	category = request.POST.get('category')
 	subcategory = request.POST.get('subcategory')
@@ -36,9 +33,35 @@ def add_to_cart(request):
 	context = {'Product_title':Product_title, 'price':price, 'total_cart':total_cart }	
 	return JsonResponse(context)
 
+
+@login_required(login_url='/account/login/')
 def cart_checkout(request):
-	cart = Cart.objects.filter(user=request.user, paid=False, order=False)
-	a = 0
-	for i in cart:
-		a+=i.price
-	return render(request, 'cart/cart.html', {'cart':cart, 'total_cart':a})
+	try:
+		cart = Cart.objects.filter(user=request.user, paid=False, order=False)
+		a = 0
+		for i in cart:
+			a+=i.price
+		return render(request, 'cart/cart.html', {'cart':cart, 'total_cart':a})
+	except:
+		return render(request, 'cart/cart.html'
+			)
+def delete_cart(request, id):
+	cart = Cart.objects.get(id=int(id), user=request.user)
+	cart.delete()
+	context = {'status':'done' }	
+	return JsonResponse(context)
+
+def change_cart(request, data):
+	product_id = data
+	print(product_id)
+	quantity = request.POST.get('quantity')
+	cart_id = request.POST.get('cart_id')
+	cart = Cart.objects.get(id=cart_id, user=request.user)
+
+	print(cart)
+	cart.quantity = int(quantity)
+	price = cart.single_price 
+	cart.price = price * int(quantity)
+	cart.save()
+	context = {'price':cart.price, 'id':cart_id }	
+	return JsonResponse(context)

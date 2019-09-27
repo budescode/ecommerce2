@@ -96,7 +96,8 @@ def settings(request):
 	context = {'form':form, 'vendor1':vendor1}
 
 	return render(request, 'administrator/settings.html', context)
-
+	
+@login_required(login_url='/account/login/')
 def sale(request):
 	vendor = Vendor.objects.get(user=request.user)
 	order = Order.objects.filter(vendor=vendor)

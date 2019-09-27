@@ -124,7 +124,7 @@
     </thead>
     <tbody>
        {% for i in cart %}
-      <tr>
+      <tr id="tr{{i.id}}">
         <td><img src="{{i.image1}}" class="img-fluid" width="80" height="80"></td>
         <td>{{i.description|safe}}</td>
         <td>{{i.single_price}}</td>
@@ -132,16 +132,16 @@
           <div class="input-group mb-3">
           <div class="input-group-prepend">
 
-          <span class="input-group-text"><button type="button" class="btn btn-success btn-sm" onclick="decreaseQuantity()"><i class="fa fa-minus"></i></button> </span>
+          <span class="input-group-text"><button type="button" id="{{i.id}}" class="btn btn-success btn-sm" onclick="decreaseQuantity(this)"><i class="fa fa-minus"></i></button> </span>
           </div>
-          <input type="text" class="form-control" placeholder="1" value=1 id="quantity">
+          <input type="text" class="form-control" value={{i.quantity}} id="quantity{{i.id}}">
           <div class="input-group-prepend">
-          <button type="button" class="btn btn-success btn-sm" onclick="increaseQuantity()"><i class="fa fa-plus"></i></button>
+          <button type="button" id="{{i.id}}" class="btn btn-success btn-sm" onclick="increaseQuantity(this)"><i class="fa fa-plus"></i></button>
           </div>
           </div>
         </td>
-        <td>{{i.price}}</td>
-        <td><i class="fa fa-trash" style="font-size: 20px;"></i></td>
+        <td id="price{{i.id}}">{{i.price}}</td>
+        <td ><i class="fa fa-trash" style="font-size: 20px;cursor: pointer;" id="{{i.id}}" onclick="deleteCart(this)"></i></td>
       </tr>
       {% endfor %}
     </tbody>
@@ -263,7 +263,87 @@
 {% csrf_token %}
 
 
+<script>
 
+function increaseQuantity(x){
+  q = '#quantity' + x.id
+  quantity = document.querySelector(q).value
+  quantity = Number(quantity)+1
+  if (quantity>=1){
+  document.querySelector(q).value = quantity
+  console.log(quantity)
+   changeCart(x.id, quantity)
+  }
+
+}
+
+function decreaseQuantity(x){
+  q = '#quantity' + x.id
+  quantity = document.querySelector(q).value
+
+  quantity = Number(quantity)-1
+  if (quantity>=1){
+  document.querySelector(q).value = quantity
+    changeCart(x.id, quantity)
+  }
+
+}
+
+function changeCart(x, y){
+console.log(x, y)
+token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+    var url = 'http://127.0.0.1:8000/cart/cart-change/'+ x.id+'/'
+    let  formData = new FormData()
+    formData.append('quantity', y)
+    formData.append('cart_id', x)
+    
+    fetch(url,
+    {
+    body: new URLSearchParams(formData),
+    method: 'post',
+    headers:{
+    'X-CSRFTOKEN': token
+    }
+
+
+    }).then(res => res.json()).then(function(data) {
+
+    console.log(data)
+    qs = '#price' + data.id
+    // price =  document.querySelector(qs)
+    document.querySelector(qs).innerHTML = data.price
+    // document.querySelector('#cart_count').innerHTML = data.total_cart;
+
+    })
+}
+
+
+  function deleteCart(x){
+    console.log(x.id)
+    token = document.querySelector("input[name=csrfmiddlewaretoken]").value
+    var url = 'http://127.0.0.1:8000/cart/cart-delete/'+ x.id+'/'
+    let  formData = new FormData()
+    formData.append('id', x.id)
+    fetch(url,
+    {
+    body: new URLSearchParams(formData),
+    method: 'post',
+    headers:{
+    'X-CSRFTOKEN': token
+    }
+
+
+    }).then(res => res.json()).then(function(data) {
+
+    console.log(data)
+    td =  document.querySelector('#tr'+x.id)
+    td.remove()
+    // document.querySelector('#alert').style.display = 'block';
+    // document.querySelector('#cart_count').innerHTML = data.total_cart;
+
+    })
+  }
+</script>
 
 
 

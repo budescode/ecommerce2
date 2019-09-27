@@ -124,7 +124,7 @@ color: white;
 <li class="float-sm-right">|</li>
 <li class="float-sm-right"><a href="{% url 'account:logout' %}">Logout</a></li>
 {% else %}
-
+<li class="float-sm-right"><a href="{% url 'account:login' %}">Login</a></li>
    <li>  <span class="float-sm-right" style="padding: 2px 5px">
       
         <a  style="color: white;" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Sign up</a> 
@@ -133,8 +133,8 @@ color: white;
 <!--       <li>|</li>
       <li>sign up <i class="fa fa-caret"></i></li> -->
 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-<a class="dropdown-item" href="#">Business Account</a>
-<a class="dropdown-item" href="#">Personal Account</a>
+<a class="dropdown-item" href="{% url 'account:register_vendor' %}" style="color: black;">Business Account</a>
+<a class="dropdown-item" href="{% url 'account:register' %}" style="color: black;">Personal Account</a>
 
 </div>
  </span>
